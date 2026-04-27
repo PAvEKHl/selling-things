@@ -2,10 +2,8 @@
    MAIN PAGE SPECIFIC - только для главной страницы
    ======================================== */
 
-// Константа для конвертации (1 бун = 26 рублей)
 const BYN_TO_RUB = 26;
 
-// Массив товаров
 const items = [
     {
         name: "Футболка Dior",
@@ -14,7 +12,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "Dior",
-        img: "/images/Dior.jpg"
+        img: "images/Dior.jpg"
     },
     {
         name: "Футболка Vans (белая)",
@@ -23,7 +21,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "Vans",
-        img: "/images/Vans_White.jpg"
+        img: "images/Vans_White.jpg"
     },
     {
         name: "Футболка Vans (чёрная)",
@@ -32,7 +30,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "Vans",
-        img: "/images/Vans_Black.jpg"
+        img: "images/Vans_Black.jpg"
     },
     {
         name: "Футболка 'RULES THE WORLD'",
@@ -41,7 +39,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "Streetwear",
-        img: "/images/RULES_THE_WORL.jpg"
+        img: "images/RULES_THE_WORL.jpg"
     },
     {
         name: "Кроссовки Lanvin",
@@ -50,7 +48,7 @@ const items = [
         currency: "бун",
         category: "Кроссовки",
         brand: "Lanvin",
-        img: "/images/Lanvin.jpg"
+        img: "images/Lanvin.jpg"
     },
     {
         name: "C.P. Company (белая)",
@@ -59,7 +57,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "C.P. Company",
-        img: "/images/C.P.Company_White.jpg"
+        img: "images/C.P.Company_White.jpg"
     },
     {
         name: "C.P. Company (чёрная)",
@@ -68,7 +66,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "C.P. Company",
-        img: "/images/C.P.Company_Black.jpg"
+        img: "images/C.P.Company_Black.jpg"
     },
     {
         name: "MM6 Maison Margiela (белая)",
@@ -77,7 +75,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "MM6",
-        img: "/images/Masion_Margela_Whity.jpg"
+        img: "images/Masion_Margela_Whity.jpg"
     },
     {
         name: "MM6 Maison Margiela (чёрная)",
@@ -86,7 +84,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "MM6",
-        img: "/images/Masion_Margela_Black.jpg"
+        img: "images/Masion_Margela_Black.jpg"
     },
     {
         name: "Футболка 'Цветущая сакура'",
@@ -95,7 +93,7 @@ const items = [
         currency: "бун",
         category: "Футболки и майки",
         brand: "Artwear",
-        img: "/images/sakura.jpg"
+        img: "images/sakura.jpg"
     },
     {
         name: "Джинсы Dime",
@@ -104,23 +102,20 @@ const items = [
         currency: "бун",
         category: "Джинсы",
         brand: "Dime",
-        img: "/images/Diime.jpg"
+        img: "images/Diime.jpg"
     }
 ];
 
-// Функция конвертации бун в рубли
 function convertToRUB(priceBYN) {
     const priceNum = parseInt(priceBYN);
     return Math.round(priceNum * BYN_TO_RUB);
 }
 
-// Функция для перенаправления на контакты
 function discussPurchase(productName) {
     localStorage.setItem('selectedProduct', productName);
-    window.location.href = '/contacts.html#contacts';
+    window.location.href = 'contacts.html#contacts';
 }
 
-// Функция загрузки товаров
 function loadProducts() {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
@@ -173,33 +168,24 @@ function loadProducts() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+    }, { threshold: 0.1 });
     
     document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 }
 
-// Модальное окно
 const modal = document.getElementById('productModal');
 
 function openModal(product) {
     if (!modal) return;
     
     const priceInRub = convertToRUB(product.price);
-    const modalImg = document.getElementById('modalImg');
-    const modalName = document.getElementById('modalName');
-    const modalCategory = document.getElementById('modalCategory');
-    const modalPrice = document.getElementById('modalPrice');
-    const modalSize = document.getElementById('modalSize');
-    const modalBrand = document.getElementById('modalBrand');
-    const modalRubHint = document.getElementById('modalRubHint');
-    
-    if (modalImg) modalImg.src = product.img;
-    if (modalName) modalName.innerText = product.name;
-    if (modalCategory) modalCategory.innerHTML = `<span class="modal-category">${product.category}</span>`;
-    if (modalBrand) modalBrand.innerHTML = `<span class="modal-brand">🏷️ ${product.brand}</span>`;
-    if (modalSize) modalSize.innerHTML = `<span class="modal-size">📏 Размер: ${product.size}</span>`;
-    if (modalPrice) modalPrice.innerText = `${product.price} ${product.currency}`;
-    if (modalRubHint) modalRubHint.innerHTML = `≈ ${priceInRub.toLocaleString()} рублей`;
+    document.getElementById('modalImg').src = product.img;
+    document.getElementById('modalName').innerText = product.name;
+    document.getElementById('modalCategory').innerHTML = `<span class="modal-category">${product.category}</span>`;
+    document.getElementById('modalBrand').innerHTML = `<span class="modal-brand">🏷️ ${product.brand}</span>`;
+    document.getElementById('modalSize').innerHTML = `<span class="modal-size">📏 Размер: ${product.size}</span>`;
+    document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
+    document.getElementById('modalRubHint').innerHTML = `≈ ${priceInRub.toLocaleString()} рублей`;
     
     modal.style.display = 'flex';
 }
@@ -207,19 +193,15 @@ function openModal(product) {
 function initModal() {
     if (!modal) return;
     
-    const closeModal = document.querySelector('.close-modal');
-    if (closeModal) {
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-    }
+    document.querySelector('.close-modal').addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
     
     window.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
     });
 }
 
-// Фильтрация
 function initFilters() {
     if (document.querySelector('.filter-bar')) return;
     
@@ -232,9 +214,8 @@ function initFilters() {
         <button class="filter-btn" data-filter="Джинсы">Джинсы</button>
     `;
     
-    const catalogSection = document.querySelector('#catalog');
     const sectionTitle = document.querySelector('.section-title');
-    if (catalogSection && sectionTitle) {
+    if (sectionTitle) {
         sectionTitle.after(filterContainer);
     }
     
@@ -261,7 +242,6 @@ function initFilters() {
     });
 }
 
-// Статистика
 function showStats() {
     if (document.querySelector('.stats-bar')) return;
     
@@ -291,14 +271,10 @@ function showStats() {
     }
 }
 
-// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     initModal();
     initFilters();
     showStats();
-    
     console.log('✅ Главная страница загружена');
-    console.log(`📦 Товаров в каталоге: ${items.length}`);
-    console.log(`💱 Курс: 1 бун = ${BYN_TO_RUB} ₽`);
 });
