@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>MODERN WEAR | Магазин одежды</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="/css/global.css">
+    
+    <!-- Page Specific Styles -->
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">MODERN<span>WEAR</span></div>
+        <div class="burger" id="burger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="/">Главная</a></li>
+            <li><a href="#catalog" id="catalogNavLink">Каталог</a></li>
+            <li><a href="/contacts.html">О нас</a></li>
+            <li><a href="/contacts.html#contacts">Контакты</a></li>
+        </ul>
+        <!-- Иконки поиска и корзины временно закомментированы -->
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Новая коллекция 2026</h1>
+            <p>Минимализм и комфорт в каждой детали вашего гардероба.</p>
+            <a href="#catalog" class="cta-btn">Смотреть каталог</a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="catalog">
+        <div class="section-title" id="catalogTitle">
+            <h2>Наши товары</h2>
+            <div class="underline"></div>
+        </div>
+        <div id="catalog-grid" class="catalog-grid"></div>
+    </main>
+
+    <!-- Modal Window -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modalImg" src="" alt="">
+            <h3 id="modalName"></h3>
+            <div id="modalBrand" style="margin: 10px 0;"></div>
+            <div id="modalCategory" style="margin: 10px 0;"></div>
+            <div id="modalSize" style="margin: 10px 0;"></div>
+            <div class="price" id="modalPrice" style="font-size: 2rem; margin-top: 15px;"></div>
+            <div id="modalRubHint" style="margin-top: 5px; font-size: 0.9rem; color: #28a745;"></div>
+            <a href="/contacts.html#contacts" class="modal-contact-btn">📞 Связаться для покупки</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>MODERNWEAR</h3>
+                <p>Лучшая одежда для тех, кто ценит стиль.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/">Главная</a>
+                <a href="#catalog">Каталог</a>
+                <a href="/contacts.html">О нас</a>
+                <a href="/contacts.html#contacts">Контакты</a>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2026 Все права защищены</p>
+    </footer>
+
+    <!-- Global JS -->
+    <script src="/js/global.js"></script>
+    
+    <!-- Page Specific JS -->
+    <script src="/js/main.js"></script>
+    
+    <!-- Дополнительный скрипт для коррекции скролла -->
+    <script>
+        // Функция для скролла к заголовку с учетом высоты навбара
+        function scrollToCatalogTitle() {
+            const catalogTitle = document.getElementById('catalogTitle');
+            const navbar = document.querySelector('.navbar');
+            
+            if (catalogTitle) {
+                // Получаем позицию элемента
+                const titlePosition = catalogTitle.getBoundingClientRect().top + window.pageYOffset;
+                // Получаем высоту навбара
+                const navbarHeight = navbar ? navbar.offsetHeight : 80;
+                // Вычитаем высоту навбара, чтобы заголовок был виден полностью
+                const offsetPosition = titlePosition - navbarHeight - 10;
+                
+                // Плавный скролл
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Добавляем визуальный эффект
+                catalogTitle.classList.add('highlight-title');
+                setTimeout(() => {
+                    catalogTitle.classList.remove('highlight-title');
+                }, 800);
+            }
+        }
+        
+        // Обработчик для всех ссылок на каталог
+        document.addEventListener('DOMContentLoaded', () => {
+            // Находим все ссылки, ведущие к #catalog
+            const catalogLinks = document.querySelectorAll('a[href="#catalog"]');
+            
+            catalogLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    scrollToCatalogTitle();
+                });
+            });
+            
+            // Если в URL есть якорь #catalog, скроллим к заголовку
+            if (window.location.hash === '#catalog') {
+                setTimeout(() => {
+                    scrollToCatalogTitle();
+                }, 300);
+            }
+        });
+    </script>
+</body>
+</html>
