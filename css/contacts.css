@@ -167,7 +167,7 @@
     line-height: 1.4;
 }
 
-/* Contacts Section */
+/* Contacts Section - ВСЕГДА 2 КОЛОНКИ, даже на телефоне */
 .contacts-section {
     padding: 80px 0;
     background: white;
@@ -511,24 +511,35 @@
         font-size: 0.65rem;
     }
     
+    /* Контакты - остаются 2 КОЛОНКИ на телефоне */
     .contacts-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
     }
     .contact-card {
-        padding: 25px 20px;
+        padding: 15px 10px;
     }
     .contact-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.6rem;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
     }
     .contact-card h3 {
-        font-size: 1.2rem;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+    .contact-links {
+        gap: 6px;
     }
     .contact-btn {
-        font-size: 0.8rem;
-        padding: 8px 12px;
+        font-size: 0.65rem;
+        padding: 6px 8px;
+    }
+    .operator-badge {
+        font-size: 0.6rem;
+        padding: 3px 8px;
+        margin-top: 5px;
     }
     
     .social-grid {
@@ -570,6 +581,25 @@
 }
 
 @media (max-width: 380px) {
+    .contacts-grid {
+        gap: 10px;
+    }
+    .contact-card {
+        padding: 12px 8px;
+    }
+    .contact-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    .contact-card h3 {
+        font-size: 0.8rem;
+    }
+    .contact-btn {
+        font-size: 0.6rem;
+        padding: 5px 6px;
+    }
+    
     .delivery-item {
         padding: 10px 6px;
     }
