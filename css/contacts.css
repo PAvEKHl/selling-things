@@ -169,6 +169,7 @@
 
 /* ========================================
    CONTACTS SECTION - КОНТАКТЫ (Даниил и Павел)
+   КНОПКИ ПРИЖАТЫ К НИЗУ
    ======================================== */
 .contacts-section {
     padding: 80px 0;
@@ -191,10 +192,10 @@
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.05);
-    min-height: 500px;           /* ← уменьшено с 600 до 500 */
+    min-height: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* УБИРАЕМ justify-content: center - теперь контент не по центру */
 }
 
 .contact-card:hover {
@@ -225,7 +226,9 @@
 .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 20px;                    /* ← увеличено с 18 до 20 */
+    gap: 20px;
+    /* ЭТОТ БЛОК С КНОПКАМИ БУДЕТ ПРИЖАТ К НИЗУ */
+    margin-top: auto;
 }
 
 /* КНОПКИ - УВЕЛИЧЕНЫ ДЛЯ УДОБНОГО НАЖАТИЯ */
@@ -233,12 +236,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;                    /* ← увеличено с 12 до 14 */
-    padding: 18px 24px;           /* ← увеличено с 16px 20px до 18px 24px */
-    border-radius: 80px;          /* ← увеличено с 60px до 80px (более круглые) */
+    gap: 14px;
+    padding: 18px 24px;
+    border-radius: 80px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.1rem;            /* ← увеличено с 1rem до 1.1rem */
+    font-size: 1.1rem;
     transition: all 0.3s ease;
     width: 100%;
     box-sizing: border-box;
@@ -272,7 +275,7 @@
     font-size: 0.9rem;
     font-weight: 700;
     color: #ff4757;
-    margin-top: 20px;
+    margin-top: 15px;
     width: fit-content;
     align-self: center;
 }
