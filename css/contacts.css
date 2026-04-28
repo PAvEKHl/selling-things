@@ -238,10 +238,11 @@
     border-radius: 60px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     transition: all 0.3s ease;
     width: 100%;
     box-sizing: border-box;
+    white-space: nowrap;
 }
 
 .contact-btn.telegram {
@@ -441,7 +442,7 @@
     display: block;
 }
 
-/* ========== АДАПТИВ - ТОЛЬКО ДЛЯ СЕТОК, НО НЕ ДЛЯ КОНТАКТОВ ========== */
+/* ========== АДАПТИВ - УМЕНЬШАЕМ ТОЛЬКО ТЕКСТ НА ТЕЛЕФОНЕ ========== */
 
 @media (max-width: 1024px) {
     .hero { margin-top: 60px; }
@@ -460,25 +461,18 @@
     .about-image { order: -1; }
     .container { padding: 0 4%; }
     
-    /* Доставка - 2 колонки на планшете */
+    /* Доставка - 2 колонки */
     .delivery-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
     }
     
-    /* Соцсети - 2 колонки на планшете */
+    /* Соцсети - 2 колонки */
     .social-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
     }
-    
-    /* КОНТАКТЫ - НЕ МЕНЯЕМ! Оставляем как на ПК */
 }
 
 @media (max-width: 650px) {
-    .delivery-grid {
-        gap: 12px;
-    }
     .delivery-item {
         padding: 15px 10px;
     }
@@ -513,6 +507,22 @@
     }
 }
 
+@media (max-width: 550px) {
+    .contacts-grid {
+        gap: 15px;
+    }
+    
+    /* УМЕНЬШАЕМ ТЕКСТ НА ТЕЛЕФОНЕ, НО КНОПКА ОСТАЁТСЯ ТОЙ ЖЕ */
+    .contact-btn {
+        font-size: 0.75rem;
+        gap: 8px;
+    }
+    
+    .operator-badge {
+        font-size: 0.65rem;
+    }
+}
+
 @media (max-width: 480px) {
     .hero { height: 30vh; margin-top: 60px; }
     .hero-content h1 { font-size: 1.5rem; }
@@ -535,9 +545,7 @@
         font-size: 0.65rem;
     }
     
-    /* СОЦСЕТИ - 2 колонки на телефоне */
     .social-grid {
-        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
     .social-card {
@@ -561,9 +569,15 @@
         font-size: 0.65rem;
     }
     
-    /* КОНТАКТЫ - НЕ МЕНЯЕМ! Оставляем как на ПК */
-    .contacts-grid {
-        gap: 20px;
+    /* ЕЩЁ МЕНЬШЕ ТЕКСТ НА МАЛЕНЬКИХ ТЕЛЕФОНАХ */
+    .contact-btn {
+        font-size: 0.7rem;
+        gap: 6px;
+    }
+    
+    .operator-badge {
+        font-size: 0.6rem;
+        padding: 3px 8px;
     }
     
     .faq-question {
@@ -581,6 +595,21 @@
 }
 
 @media (max-width: 380px) {
+    .contacts-grid {
+        gap: 10px;
+    }
+    
+    /* САМЫЙ МАЛЕНЬКИЙ ТЕКСТ */
+    .contact-btn {
+        font-size: 0.6rem;
+        gap: 5px;
+    }
+    
+    .operator-badge {
+        font-size: 0.55rem;
+        padding: 2px 6px;
+    }
+    
     .delivery-item {
         padding: 10px 6px;
     }
