@@ -5,7 +5,7 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 8%;
+    padding: 0 5%;
 }
 
 /* Hero секция */
@@ -106,7 +106,7 @@
     transform: scale(1.02);
 }
 
-/* Delivery Section - 4 колонки */
+/* Delivery Section */
 .delivery-section {
     padding: 80px 0;
     background: #f8f9fa;
@@ -133,18 +133,16 @@
 .delivery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 20px;
 }
 
 .delivery-item {
     text-align: center;
-    padding: 30px 20px;
+    padding: 20px 12px;
     background: white;
     border-radius: 20px;
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    word-wrap: break-word;
-    overflow-wrap: break-word;
 }
 
 .delivery-item:hover {
@@ -153,23 +151,23 @@
 }
 
 .delivery-icon {
-    font-size: 2.5rem;
-    margin-bottom: 15px;
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
 .delivery-item h3 {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
     font-weight: 600;
 }
 
 .delivery-item p {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     color: #6c757d;
     line-height: 1.4;
 }
 
-/* Contacts Section - 2 колонки */
+/* Contacts Section */
 .contacts-section {
     padding: 80px 0;
     background: white;
@@ -178,7 +176,7 @@
 .contacts-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 40px;
+    gap: 30px;
     max-width: 900px;
     margin: 0 auto;
 }
@@ -186,7 +184,7 @@
 .contact-card {
     background: white;
     border-radius: 20px;
-    padding: 40px;
+    padding: 30px 25px;
     text-align: center;
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -199,37 +197,38 @@
 }
 
 .contact-icon {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     background: linear-gradient(135deg, #fff5f5, #ffe0e0);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 2.5rem;
+    margin: 0 auto 15px;
+    font-size: 2rem;
 }
 
 .contact-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+    font-size: 1.3rem;
+    margin-bottom: 15px;
 }
 
 .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .contact-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 12px 20px;
+    gap: 8px;
+    padding: 10px 15px;
     border-radius: 50px;
     text-decoration: none;
     font-weight: 600;
+    font-size: 0.85rem;
     transition: all 0.3s ease;
 }
 
@@ -255,13 +254,13 @@
 
 .operator-badge {
     display: inline-block;
-    padding: 4px 12px;
+    padding: 4px 10px;
     background: #f0f0f0;
     border-radius: 20px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     color: #ff4757;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .operator-badge.mts {
@@ -271,15 +270,15 @@
 .info-message {
     background: #fff3cd;
     border-left: 4px solid #ffc107;
-    padding: 20px;
+    padding: 15px;
     border-radius: 12px;
     margin-top: 40px;
     max-width: 900px;
     margin: 40px auto 0;
-    word-wrap: break-word;
+    font-size: 0.9rem;
 }
 
-/* Социальные сети - 4 колонки */
+/* Социальные сети */
 .social-section {
     padding: 80px 0;
     background: linear-gradient(135deg, #f5f7fa 0%, #eef2f7 100%);
@@ -288,7 +287,7 @@
 .social-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
+    gap: 20px;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -296,7 +295,7 @@
 .social-card {
     background: white;
     border-radius: 20px;
-    padding: 35px 25px;
+    padding: 25px 15px;
     text-align: center;
     text-decoration: none;
     transition: all 0.3s ease;
@@ -305,9 +304,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
+    gap: 8px;
 }
 
 .social-card:hover {
@@ -316,8 +313,8 @@
 }
 
 .social-icon {
-    width: 70px;
-    height: 70px;
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -340,22 +337,26 @@
     background: #0088cc;
 }
 
+.social-icon img {
+    width: 30px !important;
+    height: 30px !important;
+}
+
 .social-card h3 {
-    font-size: 1.3rem;
+    font-size: 1rem;
     font-weight: 700;
     color: #1a1a2e;
     margin: 0;
 }
 
 .social-card p {
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     color: #6c757d;
     margin: 0;
-    word-break: break-all;
 }
 
 .social-follow {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 600;
     color: #ff4757;
     display: flex;
@@ -382,15 +383,16 @@
 .faq-item {
     background: white;
     border-radius: 12px;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
 
 .faq-question {
-    padding: 20px;
+    padding: 18px;
     font-weight: 600;
+    font-size: 0.95rem;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -404,7 +406,7 @@
 
 .faq-question::after {
     content: '+';
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #ff4757;
 }
 
@@ -413,24 +415,26 @@
 }
 
 .faq-answer {
-    padding: 0 20px 20px;
+    padding: 0 18px 18px;
     display: none;
     color: #6c757d;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    line-height: 1.5;
 }
 
 .faq-item.active .faq-answer {
     display: block;
 }
 
-/* ========== АДАПТИВ ДЛЯ ТЕЛЕФОНОВ ========== */
+/* ========== АДАПТИВ ========== */
 
 @media (max-width: 1024px) {
     .hero { margin-top: 60px; }
     .hero-content h1 { font-size: 2.5rem; }
     .about-grid { gap: 40px; }
-    .delivery-grid { gap: 20px; }
-    .social-grid { gap: 20px; }
+    .delivery-grid { gap: 15px; }
+    .social-grid { gap: 15px; }
+    .container { padding: 0 4%; }
 }
 
 @media (max-width: 768px) {
@@ -439,91 +443,15 @@
     .about-section, .delivery-section, .contacts-section, .social-section, .faq-section { padding: 50px 0; }
     .about-grid { grid-template-columns: 1fr; }
     .about-image { order: -1; }
-    .container { padding: 0 5%; }
-    
-    /* Доставка - 4 колонки, но компактнее */
-    .delivery-grid {
-        gap: 15px;
-    }
-    .delivery-item {
-        padding: 20px 12px;
-    }
-    .delivery-icon {
-        font-size: 2rem;
-    }
-    .delivery-item h3 {
-        font-size: 0.9rem;
-    }
-    .delivery-item p {
-        font-size: 0.7rem;
-        line-height: 1.3;
-    }
-    
-    /* Соцсети - 4 колонки, компактнее */
-    .social-grid {
-        gap: 15px;
-    }
-    .social-card {
-        padding: 20px 12px;
-    }
-    .social-icon {
-        width: 45px;
-        height: 45px;
-    }
-    .social-icon img {
-        width: 25px !important;
-        height: 25px !important;
-    }
-    .social-card h3 {
-        font-size: 0.9rem;
-    }
-    .social-card p {
-        font-size: 0.65rem;
-    }
-    .social-follow {
-        font-size: 0.65rem;
-    }
-    
-    /* Контакты - 2 колонки */
-    .contacts-grid {
-        gap: 20px;
-    }
-    .contact-card {
-        padding: 25px 20px;
-    }
-    .contact-icon {
-        width: 55px;
-        height: 55px;
-        font-size: 1.8rem;
-    }
-    .contact-card h3 {
-        font-size: 1.2rem;
-    }
-    .contact-btn {
-        padding: 8px 12px;
-        font-size: 0.75rem;
-    }
+    .container { padding: 0 4%; }
 }
 
 @media (max-width: 650px) {
-    /* На узких экранах - 2 колонки для доставки и соцсетей */
     .delivery-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        gap: 12px;
     }
     .social-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero { height: 30vh; margin-top: 60px; }
-    .hero-content h1 { font-size: 1.5rem; }
-    .section-title h2 { font-size: 1.6rem; }
-    
-    /* Доставка - 2 колонки, чтобы не вылезало */
-    .delivery-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
@@ -534,56 +462,41 @@
         font-size: 1.6rem;
     }
     .delivery-item h3 {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     .delivery-item p {
-        font-size: 0.65rem;
-    }
-    
-    /* Соцсети - 2 колонки */
-    .social-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        font-size: 0.7rem;
     }
     .social-card {
-        padding: 15px 10px;
+        padding: 15px 12px;
     }
     .social-icon {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
     }
     .social-icon img {
-        width: 22px !important;
-        height: 22px !important;
+        width: 25px !important;
+        height: 25px !important;
     }
     .social-card h3 {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
     .social-card p {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
     .social-follow {
-        font-size: 0.6rem;
-    }
-    
-    /* Контакты - 1 колонка */
-    .contacts-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    .contact-card {
-        padding: 25px;
-    }
-    .info-message {
-        font-size: 0.85rem;
-        padding: 15px;
+        font-size: 0.7rem;
     }
 }
 
-@media (max-width: 380px) {
-    /* Для очень маленьких экранов */
-    .container {
-        padding: 0 3%;
+@media (max-width: 480px) {
+    .hero { height: 30vh; margin-top: 60px; }
+    .hero-content h1 { font-size: 1.5rem; }
+    .section-title h2 { font-size: 1.6rem; }
+    .container { padding: 0 3%; }
+    
+    .delivery-grid {
+        gap: 10px;
     }
     .delivery-item {
         padding: 12px 8px;
@@ -595,16 +508,84 @@
         font-size: 0.75rem;
     }
     .delivery-item p {
-        font-size: 0.6rem;
+        font-size: 0.65rem;
+    }
+    
+    .contacts-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .contact-card {
+        padding: 25px 20px;
+    }
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+    }
+    .contact-card h3 {
+        font-size: 1.2rem;
+    }
+    .contact-btn {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+    
+    .social-grid {
+        gap: 10px;
     }
     .social-card {
         padding: 12px 8px;
     }
+    .social-icon {
+        width: 40px;
+        height: 40px;
+    }
+    .social-icon img {
+        width: 22px !important;
+        height: 22px !important;
+    }
     .social-card h3 {
+        font-size: 0.75rem;
+    }
+    .social-card p {
+        font-size: 0.65rem;
+    }
+    .social-follow {
+        font-size: 0.65rem;
+    }
+    
+    .faq-question {
+        font-size: 0.85rem;
+        padding: 15px;
+    }
+    .faq-answer {
+        font-size: 0.75rem;
+        padding: 0 15px 15px;
+    }
+    .info-message {
+        font-size: 0.8rem;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    .delivery-item {
+        padding: 10px 6px;
+    }
+    .delivery-icon {
+        font-size: 1.2rem;
+    }
+    .delivery-item h3 {
         font-size: 0.7rem;
     }
-    .contact-btn {
+    .delivery-item p {
+        font-size: 0.6rem;
+    }
+    .social-card {
+        padding: 10px 6px;
+    }
+    .social-card h3 {
         font-size: 0.7rem;
-        padding: 6px 10px;
     }
 }
