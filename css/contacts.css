@@ -191,8 +191,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.05);
-    /* ВЫСОТА КАРТОЧКИ - УВЕЛИЧЕНА ДО 600px */
-    min-height: 600px;
+    min-height: 500px;           /* ← уменьшено с 600 до 500 */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -226,22 +225,22 @@
 .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;                    /* ← увеличено с 18 до 20 */
 }
 
-/* КНОПКИ - УВЕЛИЧЕНЫ для удобного нажатия */
+/* КНОПКИ - УВЕЛИЧЕНЫ ДЛЯ УДОБНОГО НАЖАТИЯ */
 .contact-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    padding: 16px 20px;      /* Увеличено для большей площади нажатия */
-    border-radius: 60px;      /* Увеличен скругление */
+    gap: 14px;                    /* ← увеличено с 12 до 14 */
+    padding: 18px 24px;           /* ← увеличено с 16px 20px до 18px 24px */
+    border-radius: 80px;          /* ← увеличено с 60px до 80px (более круглые) */
     text-decoration: none;
-    font-weight: 700;         /* Жирный шрифт для лучшей читаемости */
-    font-size: 1rem;          /* Увеличен размер текста */
+    font-weight: 700;
+    font-size: 1.1rem;            /* ← увеличено с 1rem до 1.1rem */
     transition: all 0.3s ease;
-    width: 100%;              /* Кнопка на всю ширину карточки */
+    width: 100%;
     box-sizing: border-box;
 }
 
