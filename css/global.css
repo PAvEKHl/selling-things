@@ -1,11 +1,46 @@
 /* ========================================
-   GLOBAL STYLES - для всего сайта
+   GLOBAL STYLES - с масштабированием
    ======================================== */
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Базовый масштаб для всего сайта */
+:root {
+    --base-scale: 1;
+    --primary: #ff4757;
+    --primary-dark: #e03e4e;
+    --dark: #1a1a2e;
+    --gray: #6c757d;
+    --gray-light: #f8f9fa;
+    --white: #ffffff;
+    --shadow: 0 10px 30px rgba(0,0,0,0.05);
+    --shadow-hover: 0 20px 40px rgba(0,0,0,0.1);
+    --border-radius: 20px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Масштабирование контейнера в зависимости от ширины экрана */
+@media (min-width: 1920px) {
+    body { zoom: 1.2; }
+}
+@media (min-width: 2560px) {
+    body { zoom: 1.5; }
+}
+@media (max-width: 1366px) and (min-width: 1025px) {
+    body { zoom: 0.9; }
+}
+@media (max-width: 1024px) {
+    body { zoom: 1; }
+}
+@media (max-width: 768px) {
+    body { zoom: 0.9; }
+}
+@media (max-width: 480px) {
+    body { zoom: 0.8; }
 }
 
 body {
@@ -16,7 +51,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ========== НАВИГАЦИЯ (Global) ========== */
+/* Навигация */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -75,64 +110,17 @@ body {
     transition: 0.3s;
 }
 
-.nav-links li a:hover::after {
-    width: 100%;
-}
-
-.nav-links li a:hover { 
-    color: #ff4757; 
-}
-
-/* Активная ссылка */
-.nav-links li a.active {
-    color: #ff4757;
-}
-
+.nav-links li a:hover::after,
 .nav-links li a.active::after {
     width: 100%;
 }
 
-.nav-icons {
-    display: flex;
-    gap: 1rem;
+.nav-links li a:hover,
+.nav-links li a.active {
+    color: #ff4757;
 }
 
-.icon-btn {
-    background: none;
-    border: none;
-    font-size: 1.4rem;
-    cursor: pointer;
-    transition: 0.3s;
-    position: relative;
-    padding: 0.4rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.icon-btn:hover {
-    background: rgba(255, 71, 87, 0.1);
-    transform: scale(1.05);
-}
-
-.cart-count {
-    position: absolute;
-    top: -5px;
-    right: -5px;
-    background: #ff4757;
-    color: white;
-    font-size: 0.7rem;
-    font-weight: bold;
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* ========== БУРГЕР-МЕНЮ ========== */
+/* Бургер-меню */
 .burger {
     display: none;
     flex-direction: column;
@@ -147,7 +135,7 @@ body {
     transition: 0.3s;
 }
 
-/* ========== МОДАЛЬНОЕ ОКНО ========== */
+/* Модальное окно */
 .modal {
     display: none;
     position: fixed;
@@ -193,17 +181,11 @@ body {
 }
 
 @keyframes modalFade {
-    from { 
-        transform: scale(0.8); 
-        opacity: 0; 
-    }
-    to { 
-        transform: scale(1); 
-        opacity: 1; 
-    }
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
-/* ========== FOOTER (Global) ========== */
+/* Footer */
 footer {
     background: #0f0f14;
     color: #fff;
@@ -248,7 +230,7 @@ footer {
     font-size: 0.85rem;
 }
 
-/* ========== TOAST УВЕДОМЛЕНИЯ ========== */
+/* Toast уведомления */
 .toast {
     position: fixed;
     bottom: 30px;
@@ -264,45 +246,13 @@ footer {
 }
 
 @keyframes slideIn {
-    from { 
-        transform: translateX(100%); 
-        opacity: 0; 
-    }
-    to { 
-        transform: translateX(0); 
-        opacity: 1; 
-    }
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
 }
 
-/* ========== КНОПКИ (Global) ========== */
-.btn {
-    display: inline-block;
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    cursor: pointer;
-    border: none;
-    font-family: inherit;
-}
-
-.btn-primary {
-    background: #ff4757;
-    color: white;
-}
-
-.btn-primary:hover {
-    background: #ff6b81;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(255, 71, 87, 0.3);
-}
-
-/* ========== АДАПТИВ (Global) ========== */
+/* Адаптив */
 @media (max-width: 768px) {
-    .burger { 
-        display: flex; 
-    }
+    .burger { display: flex; }
     
     .nav-links {
         position: fixed;
@@ -319,174 +269,7 @@ footer {
         z-index: 999;
     }
     
-    .nav-links.active { 
-        left: 0; 
-    }
-    
-    .footer-content { 
-        flex-direction: column; 
-        text-align: center; 
-    }
-    
-    .footer-links { 
-        justify-content: center; 
-    }
-    /* ========================================
-   ПЛАВНЫЕ ПЕРЕХОДЫ ДЛЯ НАВИГАЦИИ
-   ======================================== */
-
-/* Анимация для всех ссылок */
-a, button {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Эффект при наведении на ссылки меню */
-.nav-links li a {
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-.nav-links li a:hover {
-    transform: translateY(-2px);
-}
-
-/* Эффект при клике */
-.nav-links li a:active {
-    transform: translateY(0px);
-}
-
-/* Плавное появление страницы при загрузке */
-body {
-    animation: fadeInPage 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes fadeInPage {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Плавное появление контента */
-.navbar, .hero, .section-title, .catalog-grid, footer {
-    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    animation-fill-mode: both;
-}
-
-.hero { animation-delay: 0.1s; }
-.section-title { animation-delay: 0.2s; }
-.catalog-grid { animation-delay: 0.3s; }
-footer { animation-delay: 0.4s; }
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Эффект пульсации для кнопок */
-.discuss-btn, .modal-contact-btn, .cta-btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.discuss-btn:hover, .modal-contact-btn:hover, .cta-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
-}
-
-.discuss-btn:active, .modal-contact-btn:active, .cta-btn:active {
-    transform: translateY(1px);
-    transition: all 0.05s ease;
-}
-
-/* Ripple эффект при клике */
-.ripple {
-    position: fixed;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    transform: scale(0);
-    animation: ripple-animation 0.5s ease-out;
-    pointer-events: none;
-    z-index: 9999;
-}
-
-@keyframes ripple-animation {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-
-/* Плавный переход для модального окна */
-.modal {
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.modal-content {
-    animation: modalSlideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95) translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-/* Плавное появление карточек при скролле */
-.product-card {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Hover эффект для карточек */
-.product-card:hover {
-    transform: translateY(-8px);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Плавное появление фильтров */
-.filter-bar {
-    animation: slideInDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes slideInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Плавное появление статистики */
-.stats-bar {
-    animation: fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
+    .nav-links.active { left: 0; }
+    .footer-content { flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
 }
