@@ -167,7 +167,9 @@
     line-height: 1.4;
 }
 
-/* Contacts Section - ВСЕГДА 2 КОЛОНКИ */
+/* ========================================
+   CONTACTS SECTION - КОНТАКТЫ (Даниил и Павел)
+   ======================================== */
 .contacts-section {
     padding: 80px 0;
     background: white;
@@ -189,6 +191,11 @@
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.05);
+    /* ВЫСОТА КАРТОЧКИ - УВЕЛИЧЕНА */
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .contact-card:hover {
@@ -263,7 +270,7 @@
     font-size: 0.75rem;
     font-weight: 600;
     color: #ff4757;
-    margin-top: 12px;
+    margin-top: 15px;
 }
 
 .operator-badge.mts {
@@ -455,6 +462,7 @@
     }
     .contact-card {
         padding: 25px 20px;
+        min-height: 320px;
     }
     .contact-icon {
         width: 60px;
@@ -525,6 +533,7 @@
     }
     .contact-card {
         padding: 20px 15px;
+        min-height: 280px;
     }
     .contact-icon {
         width: 55px;
@@ -569,13 +578,14 @@
         font-size: 0.65rem;
     }
     
-    /* Контакты - 2 КОЛОНКИ на телефоне */
+    /* Контакты - 2 КОЛОНКИ на телефоне, увеличенная высота */
     .contacts-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
     .contact-card {
         padding: 15px 10px;
+        min-height: 260px;
     }
     .contact-icon {
         width: 45px;
@@ -644,6 +654,7 @@
     }
     .contact-card {
         padding: 12px 8px;
+        min-height: 220px;
     }
     .contact-icon {
         width: 40px;
