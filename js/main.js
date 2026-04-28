@@ -51,7 +51,7 @@ const items = [
     },
     {
         name: "Кроссовки Lanvin",
-        size: "45",
+        size: "42",
         price: "200",
         currency: "бун",
         category: "Кроссовки",
