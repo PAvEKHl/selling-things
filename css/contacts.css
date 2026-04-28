@@ -106,7 +106,7 @@
     transform: scale(1.02);
 }
 
-/* Delivery Section */
+/* Delivery Section - 4 колонки всегда */
 .delivery-section {
     padding: 80px 0;
     background: #f8f9fa;
@@ -130,7 +130,6 @@
     margin: 15px auto 0;
 }
 
-/* Сетка доставки - 4 колонки всегда */
 .delivery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -167,7 +166,7 @@
     color: #6c757d;
 }
 
-/* Contacts Section - сетка 2 колонки */
+/* Contacts Section - 2 колонки всегда */
 .contacts-section {
     padding: 80px 0;
     background: white;
@@ -211,6 +210,12 @@
 .contact-card h3 {
     font-size: 1.5rem;
     margin-bottom: 20px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .contact-btn {
@@ -270,7 +275,7 @@
     margin: 40px auto 0;
 }
 
-/* Социальные сети - сетка 4 колонки */
+/* Социальные сети - 4 колонки всегда */
 .social-section {
     padding: 80px 0;
     background: linear-gradient(135deg, #f5f7fa 0%, #eef2f7 100%);
@@ -411,7 +416,7 @@
     display: block;
 }
 
-/* Адаптив - меняется масштаб через zoom, сетки фиксированные */
+/* Адаптив для страницы контактов - сетки НЕ меняются */
 @media (max-width: 1024px) {
     .hero { margin-top: 60px; }
     .hero-content h1 { font-size: 2.5rem; }
@@ -428,23 +433,38 @@
     .about-image { order: -1; }
     .container { padding: 0 5%; }
     
-    /* Сетки остаются прежними, но масштаб уменьшается через zoom */
-    .delivery-grid { gap: 15px; }
+    /* Сетки остаются прежними, но элементы уменьшаются */
     .delivery-item { padding: 20px 15px; }
+    .delivery-icon { font-size: 2rem; }
+    .delivery-item h3 { font-size: 0.95rem; }
+    .delivery-item p { font-size: 0.75rem; }
+    
     .social-card { padding: 25px 15px; }
     .social-icon { width: 50px; height: 50px; }
+    .social-icon img { width: 30px !important; height: 30px !important; }
     .social-card h3 { font-size: 1rem; }
     .social-card p { font-size: 0.75rem; }
+    .social-follow { font-size: 0.75rem; }
+    
+    .contact-card { padding: 30px; }
+    .contact-icon { width: 60px; height: 60px; font-size: 2rem; }
+    .contact-card h3 { font-size: 1.3rem; }
+    .contact-btn { padding: 10px 15px; font-size: 0.85rem; }
 }
 
 @media (max-width: 480px) {
     .hero { height: 30vh; margin-top: 60px; }
     .hero-content h1 { font-size: 1.5rem; }
     .section-title h2 { font-size: 1.6rem; }
-    .contact-card { padding: 25px; }
-    .contact-icon { width: 60px; height: 60px; font-size: 1.8rem; }
-    .contact-btn { font-size: 0.85rem; padding: 10px 15px; }
+    
+    .delivery-item { padding: 15px 10px; }
+    .delivery-icon { font-size: 1.8rem; }
+    .delivery-item h3 { font-size: 0.85rem; }
+    
     .social-card { padding: 20px 12px; }
     .social-icon { width: 40px; height: 40px; }
     .social-icon img { width: 25px !important; height: 25px !important; }
+    .social-card h3 { font-size: 0.85rem; }
+    .social-card p { font-size: 0.65rem; }
+    .social-follow { font-size: 0.7rem; }
 }
