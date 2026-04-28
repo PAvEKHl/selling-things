@@ -191,7 +191,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.05);
-    /* ВЫСОТА КАРТОЧКИ - УВЕЛИЧЕНА */
+    /* ВЫСОТА КАРТОЧКИ - УВЕЛИЧЕНА ДО 600px */
     min-height: 600px;
     display: flex;
     flex-direction: column;
@@ -205,41 +205,44 @@
 }
 
 .contact-icon {
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
     background: linear-gradient(135deg, #fff5f5, #ffe0e0);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 20px;
-    font-size: 2.2rem;
+    margin: 0 auto 25px;
+    font-size: 2.5rem;
 }
 
 .contact-card h3 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     color: #1a1a2e;
 }
 
 .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 18px;
 }
 
+/* КНОПКИ - УВЕЛИЧЕНЫ для удобного нажатия */
 .contact-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    padding: 12px 20px;
-    border-radius: 50px;
+    gap: 12px;
+    padding: 16px 20px;      /* Увеличено для большей площади нажатия */
+    border-radius: 60px;      /* Увеличен скругление */
     text-decoration: none;
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 700;         /* Жирный шрифт для лучшей читаемости */
+    font-size: 1rem;          /* Увеличен размер текста */
     transition: all 0.3s ease;
+    width: 100%;              /* Кнопка на всю ширину карточки */
+    box-sizing: border-box;
 }
 
 .contact-btn.telegram {
@@ -249,7 +252,7 @@
 
 .contact-btn.telegram:hover {
     background: #006699;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
 .contact-btn.phone {
@@ -259,18 +262,20 @@
 
 .contact-btn.phone:hover {
     background: #1e7e34;
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
 .operator-badge {
     display: inline-block;
-    padding: 5px 15px;
+    padding: 8px 20px;
     background: #f0f0f0;
-    border-radius: 30px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    border-radius: 40px;
+    font-size: 0.9rem;
+    font-weight: 700;
     color: #ff4757;
-    margin-top: 15px;
+    margin-top: 20px;
+    width: fit-content;
+    align-self: center;
 }
 
 .operator-badge.mts {
@@ -458,29 +463,28 @@
     /* Контакты на планшете */
     .contacts-grid {
         gap: 20px;
-        max-width: 600px;
     }
     .contact-card {
         padding: 25px 20px;
-        min-height: 320px;
+        min-height: 500px;
     }
     .contact-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.8rem;
-        margin-bottom: 15px;
+        width: 70px;
+        height: 70px;
+        font-size: 2rem;
+        margin-bottom: 20px;
     }
     .contact-card h3 {
-        font-size: 1.3rem;
-        margin-bottom: 15px;
+        font-size: 1.4rem;
+        margin-bottom: 20px;
     }
     .contact-btn {
-        padding: 10px 15px;
-        font-size: 0.8rem;
+        padding: 14px 18px;
+        font-size: 0.9rem;
     }
     .operator-badge {
-        font-size: 0.7rem;
-        padding: 4px 12px;
+        font-size: 0.8rem;
+        padding: 6px 16px;
     }
 }
 
@@ -533,26 +537,25 @@
     }
     .contact-card {
         padding: 20px 15px;
-        min-height: 280px;
+        min-height: 450px;
     }
     .contact-icon {
-        width: 55px;
-        height: 55px;
-        font-size: 1.6rem;
-        margin-bottom: 12px;
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+        margin-bottom: 15px;
     }
     .contact-card h3 {
-        font-size: 1.2rem;
-        margin-bottom: 12px;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
     }
     .contact-btn {
-        padding: 8px 12px;
-        font-size: 0.75rem;
+        padding: 12px 15px;
+        font-size: 0.85rem;
     }
     .operator-badge {
-        font-size: 0.7rem;
-        padding: 3px 10px;
-        margin-top: 8px;
+        font-size: 0.75rem;
+        padding: 5px 14px;
     }
 }
 
@@ -578,36 +581,37 @@
         font-size: 0.65rem;
     }
     
-    /* Контакты - 2 КОЛОНКИ на телефоне, увеличенная высота */
+    /* Контакты - 2 КОЛОНКИ на телефоне, кнопки увеличены */
     .contacts-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
     .contact-card {
         padding: 15px 10px;
-        min-height: 260px;
+        min-height: 400px;
     }
     .contact-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-        margin-bottom: 10px;
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        margin-bottom: 12px;
     }
     .contact-card h3 {
-        font-size: 1rem;
-        margin-bottom: 10px;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
     }
     .contact-links {
-        gap: 6px;
+        gap: 10px;
     }
     .contact-btn {
-        padding: 6px 8px;
-        font-size: 0.6rem;
+        padding: 10px 8px;
+        font-size: 0.7rem;
+        gap: 6px;
     }
     .operator-badge {
-        font-size: 0.55rem;
-        padding: 2px 8px;
-        margin-top: 6px;
+        font-size: 0.65rem;
+        padding: 4px 10px;
+        margin-top: 10px;
     }
     
     .social-grid {
@@ -654,26 +658,27 @@
     }
     .contact-card {
         padding: 12px 8px;
-        min-height: 220px;
+        min-height: 350px;
     }
     .contact-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
-        margin-bottom: 8px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        margin-bottom: 10px;
     }
     .contact-card h3 {
-        font-size: 0.85rem;
-        margin-bottom: 8px;
+        font-size: 1rem;
+        margin-bottom: 10px;
     }
     .contact-btn {
-        padding: 5px 6px;
-        font-size: 0.55rem;
+        padding: 8px 6px;
+        font-size: 0.6rem;
+        gap: 5px;
     }
     .operator-badge {
-        font-size: 0.5rem;
-        padding: 2px 6px;
-        margin-top: 5px;
+        font-size: 0.55rem;
+        padding: 3px 8px;
+        margin-top: 8px;
     }
     
     .delivery-item {
