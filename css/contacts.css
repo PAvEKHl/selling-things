@@ -169,7 +169,6 @@
 
 /* ========================================
    CONTACTS SECTION - КОНТАКТЫ (Даниил и Павел)
-   КНОПКИ ПРИЖАТЫ К НИЗУ
    ======================================== */
 .contacts-section {
     padding: 80px 0;
@@ -187,15 +186,14 @@
 .contact-card {
     background: white;
     border-radius: 20px;
-    padding: 35px 25px;
+    padding: 25px 25px 20px 25px;  /* верх 25px, низ 20px */
     text-align: center;
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.05);
-    min-height: 500px;
+    min-height: 350px;              /* ← уменьшено до 350px */
     display: flex;
     flex-direction: column;
-    /* УБИРАЕМ justify-content: center - теперь контент не по центру */
 }
 
 .contact-card:hover {
@@ -204,6 +202,7 @@
     box-shadow: 0 15px 35px rgba(0,0,0,0.1);
 }
 
+/* ИКОНКА ПОДНЯТА ВЫШЕ */
 .contact-icon {
     width: 80px;
     height: 80px;
@@ -212,36 +211,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 25px;
+    margin: 10px auto 20px;        /* ← верхний отступ 10px, нижний 20px */
     font-size: 2.5rem;
 }
 
 .contact-card h3 {
     font-size: 1.6rem;
     font-weight: 700;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     color: #1a1a2e;
 }
 
+/* БЛОК С КНОПКАМИ - прижимаем к низу */
 .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    /* ЭТОТ БЛОК С КНОПКАМИ БУДЕТ ПРИЖАТ К НИЗУ */
-    margin-top: auto;
+    gap: 18px;
+    margin-top: auto;              /* прижимает к низу */
+    margin-bottom: 10px;           /* небольшой отступ снизу */
 }
 
-/* КНОПКИ - УВЕЛИЧЕНЫ ДЛЯ УДОБНОГО НАЖАТИЯ */
+/* КНОПКИ - ЕЩЁ БОЛЬШЕ */
 .contact-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 14px;
-    padding: 18px 24px;
-    border-radius: 80px;
+    gap: 16px;                    /* ← увеличено с 14 до 16 */
+    padding: 20px 28px;           /* ← увеличено с 18px 24px до 20px 28px */
+    border-radius: 100px;         /* ← максимально круглые */
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 1.15rem;           /* ← увеличено с 1.1rem до 1.15rem */
     transition: all 0.3s ease;
     width: 100%;
     box-sizing: border-box;
@@ -267,15 +267,17 @@
     transform: translateY(-3px);
 }
 
+/* БЕЙДЖ ОПЕРАТОРА - ПОЧТИ ВНИЗУ */
 .operator-badge {
     display: inline-block;
     padding: 8px 20px;
     background: #f0f0f0;
     border-radius: 40px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: #ff4757;
-    margin-top: 15px;
+    margin-top: 15px;              /* отступ от кнопок */
+    margin-bottom: 5px;           /* маленький отступ снизу */
     width: fit-content;
     align-self: center;
 }
