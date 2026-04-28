@@ -191,7 +191,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     border: 1px solid rgba(0,0,0,0.05);
-    min-height: 200px;              /* ← 200px для ВСЕХ устройств */
+    min-height: 200px;
     display: flex;
     flex-direction: column;
 }
@@ -276,136 +276,6 @@
     margin-bottom: 0px;
     width: fit-content;
     align-self: center;
-}
-
-.operator-badge.mts {
-    color: #e63946;
-}
-
-/* ========== АДАПТИВЫ - ВЕЗДЕ min-height: 200px ========== */
-
-@media (max-width: 768px) {
-    .contact-card {
-        min-height: 200px;           /* ← 200px для планшета */
-        padding: 18px 15px 12px 15px;
-    }
-    .contact-icon {
-        width: 55px;
-        height: 55px;
-        font-size: 1.6rem;
-        margin: 0 auto 10px;
-    }
-    .contact-card h3 {
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-    }
-    .contact-links {
-        gap: 8px;
-    }
-    .contact-btn {
-        padding: 10px 14px;
-        font-size: 0.85rem;
-        gap: 10px;
-        border-radius: 50px;
-    }
-    .operator-badge {
-        padding: 4px 10px;
-        font-size: 0.65rem;
-        margin-top: 6px;
-    }
-}
-
-@media (max-width: 550px) {
-    .contact-card {
-        min-height: 200px;           /* ← 200px для маленького планшета */
-        padding: 15px 12px 10px 12px;
-    }
-    .contact-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.4rem;
-        margin: 0 auto 8px;
-    }
-    .contact-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 8px;
-    }
-    .contact-links {
-        gap: 7px;
-    }
-    .contact-btn {
-        padding: 8px 12px;
-        font-size: 0.8rem;
-        gap: 8px;
-        border-radius: 45px;
-    }
-    .operator-badge {
-        padding: 3px 8px;
-        font-size: 0.6rem;
-        margin-top: 5px;
-    }
-}
-
-@media (max-width: 480px) {
-    .contact-card {
-        min-height: 200px;           /* ← 200px для телефона */
-        padding: 12px 10px 8px 10px;
-    }
-    .contact-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-        margin: 0 auto 6px;
-    }
-    .contact-card h3 {
-        font-size: 1rem;
-        margin-bottom: 6px;
-    }
-    .contact-links {
-        gap: 6px;
-    }
-    .contact-btn {
-        padding: 7px 10px;
-        font-size: 0.7rem;
-        gap: 6px;
-        border-radius: 40px;
-    }
-    .operator-badge {
-        padding: 2px 8px;
-        font-size: 0.55rem;
-        margin-top: 4px;
-    }
-}
-
-@media (max-width: 380px) {
-    .contact-card {
-        min-height: 200px;           /* ← 200px для очень маленького телефона */
-        padding: 10px 8px 6px 8px;
-    }
-    .contact-icon {
-        width: 40px;
-        height: 40px;
-        font-size: 1.1rem;
-        margin: 0 auto 5px;
-    }
-    .contact-card h3 {
-        font-size: 0.9rem;
-        margin-bottom: 5px;
-    }
-    .contact-links {
-        gap: 5px;
-    }
-    .contact-btn {
-        padding: 6px 8px;
-        font-size: 0.65rem;
-        gap: 5px;
-        border-radius: 35px;
-    }
-    .operator-badge {
-        padding: 2px 6px;
-        font-size: 0.5rem;
-        margin-top: 3px;
-    }
 }
 
 .operator-badge.mts {
@@ -571,7 +441,7 @@
     display: block;
 }
 
-/* ========== АДАПТИВ ========== */
+/* ========== АДАПТИВ - ТОЛЬКО ДЛЯ СЕТОК, НО НЕ ДЛЯ КОНТАКТОВ ========== */
 
 @media (max-width: 1024px) {
     .hero { margin-top: 60px; }
@@ -590,41 +460,23 @@
     .about-image { order: -1; }
     .container { padding: 0 4%; }
     
-    /* Контакты на планшете */
-    .contacts-grid {
-        gap: 20px;
+    /* Доставка - 2 колонки на планшете */
+    .delivery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
-    .contact-card {
-        padding: 25px 20px;
-        min-height: 500px;
+    
+    /* Соцсети - 2 колонки на планшете */
+    .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
-    .contact-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 2rem;
-        margin-bottom: 20px;
-    }
-    .contact-card h3 {
-        font-size: 1.4rem;
-        margin-bottom: 20px;
-    }
-    .contact-btn {
-        padding: 14px 18px;
-        font-size: 0.9rem;
-    }
-    .operator-badge {
-        font-size: 0.8rem;
-        padding: 6px 16px;
-    }
+    
+    /* КОНТАКТЫ - НЕ МЕНЯЕМ! Оставляем как на ПК */
 }
 
 @media (max-width: 650px) {
     .delivery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-    .social-grid {
-        grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
     .delivery-item {
@@ -661,34 +513,6 @@
     }
 }
 
-@media (max-width: 550px) {
-    .contacts-grid {
-        gap: 15px;
-    }
-    .contact-card {
-        padding: 20px 15px;
-        min-height: 450px;
-    }
-    .contact-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.8rem;
-        margin-bottom: 15px;
-    }
-    .contact-card h3 {
-        font-size: 1.3rem;
-        margin-bottom: 15px;
-    }
-    .contact-btn {
-        padding: 12px 15px;
-        font-size: 0.85rem;
-    }
-    .operator-badge {
-        font-size: 0.75rem;
-        padding: 5px 14px;
-    }
-}
-
 @media (max-width: 480px) {
     .hero { height: 30vh; margin-top: 60px; }
     .hero-content h1 { font-size: 1.5rem; }
@@ -711,40 +535,9 @@
         font-size: 0.65rem;
     }
     
-    /* Контакты - 2 КОЛОНКИ на телефоне, кнопки увеличены */
-    .contacts-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-    .contact-card {
-        padding: 15px 10px;
-        min-height: 400px;
-    }
-    .contact-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-        margin-bottom: 12px;
-    }
-    .contact-card h3 {
-        font-size: 1.1rem;
-        margin-bottom: 12px;
-    }
-    .contact-links {
-        gap: 10px;
-    }
-    .contact-btn {
-        padding: 10px 8px;
-        font-size: 0.7rem;
-        gap: 6px;
-    }
-    .operator-badge {
-        font-size: 0.65rem;
-        padding: 4px 10px;
-        margin-top: 10px;
-    }
-    
+    /* СОЦСЕТИ - 2 колонки на телефоне */
     .social-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
     }
     .social-card {
@@ -768,6 +561,11 @@
         font-size: 0.65rem;
     }
     
+    /* КОНТАКТЫ - НЕ МЕНЯЕМ! Оставляем как на ПК */
+    .contacts-grid {
+        gap: 20px;
+    }
+    
     .faq-question {
         font-size: 0.85rem;
         padding: 15px;
@@ -783,34 +581,6 @@
 }
 
 @media (max-width: 380px) {
-    .contacts-grid {
-        gap: 10px;
-    }
-    .contact-card {
-        padding: 12px 8px;
-        min-height: 350px;
-    }
-    .contact-icon {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-        margin-bottom: 10px;
-    }
-    .contact-card h3 {
-        font-size: 1rem;
-        margin-bottom: 10px;
-    }
-    .contact-btn {
-        padding: 8px 6px;
-        font-size: 0.6rem;
-        gap: 5px;
-    }
-    .operator-badge {
-        font-size: 0.55rem;
-        padding: 3px 8px;
-        margin-top: 8px;
-    }
-    
     .delivery-item {
         padding: 10px 6px;
     }
