@@ -247,6 +247,7 @@
 .contact-btn.telegram {
     background: #0088cc;
     color: white;
+    font-size: 0.75rem;
 }
 
 .contact-btn.telegram:hover {
