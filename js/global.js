@@ -68,22 +68,9 @@ function initSmoothScroll() {
     });
 }
 
-// ❌❌❌ ПРОБЛЕМНАЯ ФУНКЦИЯ - МЕНЯЕТ ЦВЕТ НАВБАРА ПРИ СКРОЛЛЕ ❌❌❌
-function initNavbarScrollEffect() {
-    const navbar = document.querySelector('.navbar');
-    if (navbar) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgb(20, 5, 5)';  // ← становится белым
-                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
-            } else {
-                navbar.style.background = 'rgb(20, 5, 5)';  // ← становится белым
-                navbar.style.boxShadow = 'none';
-            }
-        });
-    }
-}
-// ❌❌❌ КОНЕЦ ПРОБЛЕМНОЙ ФУНКЦИИ ❌❌❌
+// ❌ ФУНКЦИЯ ИЗМЕНЕНИЯ НАВБАРА - ПОЛНОСТЬЮ УДАЛЕНА ❌
+// Навбар теперь всегда остаётся тёмным, как задано в CSS
+// (предыдущая функция, которая меняла цвет, удалена)
 
 // Инициализация корзины
 function initCartButton() {
@@ -122,7 +109,7 @@ function initSearchButton() {
 document.addEventListener('DOMContentLoaded', () => {
     initBurgerMenu();
     initSmoothScroll();
-    initNavbarScrollEffect();  // ← ЗДЕСЬ ВЫЗЫВАЕТСЯ ПРОБЛЕМНАЯ ФУНКЦИЯ
+    // initNavbarScrollEffect();  ← ЭТА СТРОКА УДАЛЕНА! Функция больше не вызывается
     initCartButton();
     initSearchButton();
     updateCartCounter();
