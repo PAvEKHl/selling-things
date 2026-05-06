@@ -112,15 +112,6 @@ const items = [
         brand: "Dime",
         img: "images/JeansDimeWhite.jpg"
     },
-    {
-        name: "Джинсы Dime",
-        size: "L",
-        price: "90",
-        currency: "бун",
-        category: "Джинсы",
-        brand: "Dime",
-        img: "images/Diime.jpg"
-    }
 ];
 
 function convertToRUB(priceBYN) {
