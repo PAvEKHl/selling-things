@@ -110,7 +110,7 @@ const items = [
         currency: "бун",
         category: "Джинсы",
         brand: "Dime",
-        img: "images/Diime.jpg"
+        img: "images/JeansDimeWhite.jpg"
     },
     {
         name: "Джинсы Dime",
