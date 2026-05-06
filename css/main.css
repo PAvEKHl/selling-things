@@ -3,10 +3,11 @@
    ======================================== */
 
 /* Hero секция */
+/* Hero секция */
 .hero {
     height: 90vh;
-    background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), 
-                url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1350&q=80');
+    background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                url('../images/MainImage1.png');
     background-size: cover;
     background-position: center;
     display: flex;
