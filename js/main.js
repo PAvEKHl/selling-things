@@ -29,6 +29,7 @@ const items = [
         price: "40",
         currency: "бун",
         category: "Футболки и майки",
+       brand: "",
         img: "images/hoodie grey.jpg"
     },
     {
