@@ -97,7 +97,16 @@ const items = [
     {
         name: "Джинсы Dime",
         size: "L",
-        price: "90",
+        price: "85",
+        currency: "бун",
+        category: "Джинсы",
+        brand: "Dime",
+        img: "images/Diime.jpg"
+    },
+   {
+        name: "Джинсы Dime",
+        size: "L",
+        price: "85",
         currency: "бун",
         category: "Джинсы",
         brand: "Dime",
