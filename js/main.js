@@ -140,7 +140,7 @@ function loadProducts() {
         card.innerHTML = `
             <div class="img-container">
                 <img src="${product.img}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/500x500?text=Image+Not+Found'">
-                <div class="badge">${product.brand}</div>
+                <div class="badge">${product.brand || ''}</div>
             </div>
             <div class="info">
                 <div class="category-tag">${product.category}</div>
@@ -191,7 +191,7 @@ function openModal(product) {
     document.getElementById('modalImg').src = product.img;
     document.getElementById('modalName').innerText = product.name;
     document.getElementById('modalCategory').innerHTML = `<span class="modal-category">${product.category}</span>`;
-    document.getElementById('modalBrand').innerHTML = `<span class="modal-brand">🏷️ ${product.brand}</span>`;
+    document.getElementById('modalBrand').innerHTML = `<span class="modal-brand">🏷️ ${product.brand || ''}</span>`;
     document.getElementById('modalSize').innerHTML = `<span class="modal-size">📏 Размер: ${product.size}</span>`;
     document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
     document.getElementById('modalRubHint').innerHTML = `≈ ${priceInRub.toLocaleString()} рублей`;
@@ -254,7 +254,7 @@ function initFilters() {
 function showStats() {
     if (document.querySelector('.stats-bar')) return;
     
-    const uniqueBrands = [...new Set(items.map(i => i.brand))];
+    const uniqueBrands = [...new Set(items.map(i => i.brand).filter(b => b && b !== ''))];
     const cheapItems = items.filter(i => parseInt(i.price) < 50).length;
     
     const statsHTML = `
