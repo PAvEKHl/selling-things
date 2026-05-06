@@ -36,7 +36,7 @@ function showToast(message) {
     setTimeout(() => toast.remove(), 2000);
 }
 
-// Бургер-меню (инициализация)
+// Бургер-меню
 function initBurgerMenu() {
     const burger = document.getElementById('burger');
     const navLinks = document.getElementById('navLinks');
@@ -68,21 +68,22 @@ function initSmoothScroll() {
     });
 }
 
-// Эффект изменения навбара при скролле
+// ❌❌❌ ПРОБЛЕМНАЯ ФУНКЦИЯ - МЕНЯЕТ ЦВЕТ НАВБАРА ПРИ СКРОЛЛЕ ❌❌❌
 function initNavbarScrollEffect() {
     const navbar = document.querySelector('.navbar');
     if (navbar) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';  // ← становится белым
                 navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
             } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.92)';
+                navbar.style.background = 'rgba(255, 255, 255, 0.92)';  // ← становится белым
                 navbar.style.boxShadow = 'none';
             }
         });
     }
 }
+// ❌❌❌ КОНЕЦ ПРОБЛЕМНОЙ ФУНКЦИИ ❌❌❌
 
 // Инициализация корзины
 function initCartButton() {
@@ -121,7 +122,7 @@ function initSearchButton() {
 document.addEventListener('DOMContentLoaded', () => {
     initBurgerMenu();
     initSmoothScroll();
-    initNavbarScrollEffect();
+    initNavbarScrollEffect();  // ← ЗДЕСЬ ВЫЗЫВАЕТСЯ ПРОБЛЕМНАЯ ФУНКЦИЯ
     initCartButton();
     initSearchButton();
     updateCartCounter();
