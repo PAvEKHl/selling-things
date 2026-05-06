@@ -41,15 +41,6 @@ const items = [
         img: "images/Vans_Black.jpg"
     },
     {
-        name: "Футболка 'RULES THE WORLD'",
-        size: "L",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "Streetwear",
-        img: "images/RULES_THE_WORL.jpg"
-    },
-    {
         name: "Кроссовки Lanvin",
         size: "42",
         price: "200",
