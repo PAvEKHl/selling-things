@@ -24,16 +24,17 @@
 }
 
 /* === ФОНОВОЕ ИЗОБРАЖЕНИЕ ДЛЯ ВСЕГО САЙТА === */
-/* ЗДЕСЬ ВЫ МЕНЯЕТЕ ССЫЛКУ НА ВАШУ КАРТИНКУ */
 body {
     font-family: 'Montserrat', sans-serif;
-    background: "images/BackgroundMain.png";
+    background: url('../images/BackgroundMain.png') center/cover fixed no-repeat;
     /* 
-    ↑ Замените эту ссылку на вашу:
-    - Локальное изображение: url('../images/ваша_картинка.jpg')
-    - Ссылка из интернета: url('https://...')
+    ↑ Если картинка в папке images:
+       url('../images/BackgroundMain.png')
+    
+    ↑ Если картинка в корне проекта:
+       url('BackgroundMain.png')
     */
-    color: #1e1e2a;
+    color: #ffffff;
     scroll-behavior: smooth;
     overflow-x: hidden;
     position: relative;
@@ -47,7 +48,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.65);
     z-index: -1;
 }
 
