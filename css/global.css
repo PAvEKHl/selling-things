@@ -1,69 +1,6 @@
 /* ========================================
    GLOBAL STYLES - с фоновым изображением
    ======================================== */
-/* ДОБАВЬТЕ ЭТИ СТИЛИ В НАЧАЛО global.css */
-
-/* Киберпанк тема */
-:root {
-    --neon-pink: #ff00ff;
-    --neon-cyan: #00ffff;
-    --neon-purple: #8a2be2;
-    --dark-bg: #0a0a0f;
-    --glitch-offset: 2px;
-}
-
-/* Анимация глитча для заголовков */
-@keyframes glitch {
-    0% { text-shadow: -2px 0 var(--neon-cyan), 2px 0 var(--neon-pink); }
-    50% { text-shadow: 2px 0 var(--neon-cyan), -2px 0 var(--neon-pink); }
-    100% { text-shadow: -2px 0 var(--neon-cyan), 2px 0 var(--neon-pink); }
-}
-
-/* Hero заголовок с неоном */
-.hero-content h1 {
-    font-size: 4rem;
-    font-weight: 800;
-    text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
-    animation: glitch 3s infinite;
-}
-
-/* Кнопки с неоном */
-.cta-btn, .discuss-btn, .modal-contact-btn {
-    background: linear-gradient(135deg, var(--neon-pink), var(--neon-purple));
-    box-shadow: 0 0 15px var(--neon-pink);
-    border: none;
-}
-
-.cta-btn:hover, .discuss-btn:hover {
-    box-shadow: 0 0 30px var(--neon-pink);
-    transform: translateY(-3px);
-}
-
-/* Карточки товаров - стеклянный эффект */
-.product-card {
-    background: rgba(20, 20, 40, 0.7);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 0, 255, 0.3);
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
-}
-
-.product-card:hover {
-    border-color: var(--neon-cyan);
-    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
-}
-
-/* Неоновые фильтры */
-.filter-btn.active {
-    background: var(--neon-pink);
-    box-shadow: 0 0 10px var(--neon-pink);
-}
-
-/* Статистика с неоном */
-.stats-bar {
-    border: 1px solid var(--neon-pink);
-    box-shadow: 0 0 20px rgba(255, 0, 255, 0.3);
-}
-/*Конец */
 * {
     margin: 0;
     padding: 0;
