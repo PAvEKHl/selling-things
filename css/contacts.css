@@ -7,12 +7,11 @@
     margin: 0 auto;
     padding: 0 5%;
 }
-
-/* ========== HERO СЕКЦИЯ - ИСПРАВЛЕНА ========== */
+/* ========== HERO СЕКЦИЯ ========== */
 .hero {
-    min-height: 30vh;
+    min-height: 40vh;
     height: auto;
-    background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75));
+    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.6));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -21,9 +20,10 @@
     margin-top: 70px;
     position: relative;
     overflow: hidden;
-    padding: 40px 20px;
+    padding: 60px 20px;
 }
 
+/* Неоновое свечение */
 .hero::before {
     content: '';
     position: absolute;
@@ -31,9 +31,28 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,0,255,0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(255,0,255,0.1) 0%, transparent 70%);
     animation: rotateGlow 20s linear infinite;
     pointer-events: none;
+}
+
+/* Фоновая картинка ТОЛЬКО для ноутбуков */
+@media (min-width: 769px) {
+    .hero {
+        background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
+                    url('../images/Слой 2.png');
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+/* Для телефонов убираем фоновую картинку (остаётся только градиент) */
+@media (max-width: 768px) {
+    .hero {
+        min-height: 30vh;
+        padding: 40px 15px;
+        background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75));
+    }
 }
 
 @keyframes rotateGlow {
@@ -48,19 +67,17 @@
 }
 
 .hero-content h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
     text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
     animation: glitchContact 3s infinite;
 }
 
 .hero-content p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     opacity: 0.9;
     text-shadow: 0 0 5px rgba(0,255,255,0.5);
-    max-width: 90%;
-    margin: 0 auto;
 }
 
 @keyframes glitchContact {
@@ -70,24 +87,15 @@
 
 /* Адаптив для телефонов */
 @media (max-width: 768px) {
-    .hero {
-        min-height: 25vh;
-        padding: 30px 15px;
-        margin-top: 60px;
-    }
     .hero-content h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
     }
     .hero-content p {
-        font-size: 0.85rem;
+        font-size: 0.9rem;
     }
 }
 
 @media (max-width: 480px) {
-    .hero {
-        min-height: 22vh;
-        padding: 25px 12px;
-    }
     .hero-content h1 {
         font-size: 1.5rem;
     }
@@ -95,6 +103,9 @@
         font-size: 0.75rem;
     }
 }
+
+
+
 
 /* About Section */
 .about-section {
