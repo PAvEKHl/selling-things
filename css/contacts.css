@@ -105,6 +105,9 @@
     align-items: center;
 }
 
+.about-text {
+    width: 100%; 
+}
 .about-text h2 {
     font-size: 2.2rem;
     font-weight: 700;
@@ -137,8 +140,9 @@
 .about-text p {
     line-height: 1.7;
     color: #ccc;
+    text-align: left;
+    width: 100%;
 }
-
 .advantages-list {
     list-style: none;
     margin-top: 20px;
