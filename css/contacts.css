@@ -7,11 +7,14 @@
     margin: 0 auto;
     padding: 0 5%;
 }
-/* ========== HERO СЕКЦИЯ ========== */
+
+/* Hero секция */
 .hero {
-    min-height: 40vh;
-    height: auto;
-    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.6));
+    height: 40vh;
+    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), 
+                url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -20,10 +23,8 @@
     margin-top: 70px;
     position: relative;
     overflow: hidden;
-    padding: 60px 20px;
 }
 
-/* Неоновое свечение */
 .hero::before {
     content: '';
     position: absolute;
@@ -36,25 +37,6 @@
     pointer-events: none;
 }
 
-/* Фоновая картинка ТОЛЬКО для ноутбуков */
-@media (min-width: 769px) {
-    .hero {
-        background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
-                    url('../images/Слой 2.png');
-        background-size: cover;
-        background-position: center;
-    }
-}
-
-/* Для телефонов убираем фоновую картинку (остаётся только градиент) */
-@media (max-width: 768px) {
-    .hero {
-        min-height: 30vh;
-        padding: 40px 15px;
-        background: linear-gradient(135deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75));
-    }
-}
-
 @keyframes rotateGlow {
     from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
@@ -63,7 +45,6 @@
 .hero-content {
     position: relative;
     z-index: 2;
-    width: 100%;
 }
 
 .hero-content h1 {
@@ -74,38 +55,16 @@
     animation: glitchContact 3s infinite;
 }
 
-.hero-content p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    text-shadow: 0 0 5px rgba(0,255,255,0.5);
-}
-
 @keyframes glitchContact {
     0%, 100% { text-shadow: -1px 0 #00ffff, 1px 0 #ff00ff; }
     50% { text-shadow: 1px 0 #00ffff, -1px 0 #ff00ff; }
 }
 
-/* Адаптив для телефонов */
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    .hero-content p {
-        font-size: 0.9rem;
-    }
+.hero-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    text-shadow: 0 0 5px rgba(0,255,255,0.5);
 }
-
-@media (max-width: 480px) {
-    .hero-content h1 {
-        font-size: 1.5rem;
-    }
-    .hero-content p {
-        font-size: 0.75rem;
-    }
-}
-
-
-
 
 /* About Section */
 .about-section {
@@ -162,10 +121,12 @@
 .advantages-list li {
     padding: 12px 0;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
     border-bottom: 1px solid rgba(255,0,255,0.2);
     color: #ddd;
+    font-size: 0.9rem;
+    line-height: 1.4;
 }
 
 .advantages-list li::before {
@@ -173,6 +134,7 @@
     color: #ff00ff;
     font-weight: bold;
     text-shadow: 0 0 5px rgba(255,0,255,0.5);
+    flex-shrink: 0;
 }
 
 .about-image img {
@@ -566,9 +528,21 @@
     }
     
     .delivery-item { padding: 15px 10px; }
+    .delivery-icon { font-size: 1.6rem; }
+    .delivery-item h3 { font-size: 0.85rem; }
+    .delivery-item p { font-size: 0.7rem; }
+    
     .social-card { padding: 15px 12px; }
     .social-icon { width: 45px; height: 45px; }
     .social-icon img { width: 25px !important; height: 25px !important; }
+    .social-card h3 { font-size: 0.85rem; }
+    .social-card p { font-size: 0.7rem; }
+    .social-follow { font-size: 0.7rem; }
+    
+    .advantages-list li {
+        font-size: 0.8rem;
+        padding: 10px 0;
+    }
 }
 
 @media (max-width: 480px) {
@@ -597,16 +571,10 @@
     .social-icon { width: 40px; height: 40px; }
     .social-icon img { width: 22px !important; height: 22px !important; }
     .social-card h3 { font-size: 0.75rem; }
+    .social-card p { font-size: 0.65rem; }
+    .social-follow { font-size: 0.65rem; }
     
     .faq-question { font-size: 0.85rem; padding: 15px; }
     .faq-answer { font-size: 0.75rem; padding: 0 15px 15px; }
     .info-message { font-size: 0.8rem; padding: 12px; }
-}
-
-@media (max-width: 380px) {
-    .delivery-item { padding: 10px 6px; }
-    .delivery-icon { font-size: 1.2rem; }
-    .delivery-item h3 { font-size: 0.7rem; }
-    .social-card { padding: 10px 6px; }
-    .social-card h3 { font-size: 0.7rem; }
-}
+    .advantages-list li {
