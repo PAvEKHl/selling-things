@@ -1,12 +1,11 @@
 /* ========================================
-   MAIN PAGE STYLES 
+   MAIN PAGE STYLES - НЕОНОВАЯ ВЕРСИЯ
    ======================================== */
 
 /* Hero секция */
-/* Hero секция */
 .hero {
     height: 90vh;
-    background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+    background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
                 url('../images/MainImage1.png');
     background-size: cover;
     background-position: center;
@@ -17,37 +16,73 @@
     color: white;
     margin-bottom: 80px;
     margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Неоновое свечение для hero */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,0,255,0.1) 0%, transparent 70%);
+    animation: rotateGlow 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content h1 {
     font-size: 4rem;
     font-weight: 800;
     margin-bottom: 1rem;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+    animation: glitch 3s infinite;
+}
+
+@keyframes glitch {
+    0%, 100% { text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; }
+    50% { text-shadow: 2px 0 #00ffff, -2px 0 #ff00ff; }
 }
 
 .hero-content p {
     font-size: 1.2rem;
     margin-bottom: 2rem;
+    text-shadow: 0 0 5px rgba(0,255,255,0.5);
 }
 
+/* Кнопки */
 .cta-btn {
     display: inline-block;
     padding: 1rem 2.5rem;
-    background: #ff4757;
+    background: linear-gradient(135deg, #ff00ff, #bf00ff);
     color: white;
     text-decoration: none;
     border-radius: 50px;
     font-weight: 700;
     transition: 0.4s;
-    box-shadow: 0 10px 20px rgba(255, 71, 87, 0.3);
+    box-shadow: 0 0 15px #ff00ff, 0 10px 20px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
 .cta-btn:hover {
-    background: #ff6b81;
+    background: linear-gradient(135deg, #ff44ff, #df44ff);
     transform: translateY(-3px);
+    box-shadow: 0 0 30px #ff00ff, 0 15px 30px rgba(0,0,0,0.4);
 }
 
-/* Заголовок */
+/* Заголовок секции */
 .section-title {
     text-align: center;
     margin-bottom: 60px;
@@ -56,18 +91,25 @@
 .section-title h2 {
     font-size: 2.5rem;
     font-weight: 700;
-    background: linear-gradient(135deg, #1e1e2a, #ff4757);
+    background: linear-gradient(135deg, #fff, #ff00ff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+    text-shadow: 0 0 20px rgba(255,0,255,0.5);
 }
 
 .underline {
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, #ff4757, #ff6b81);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff00ff, #00ffff, #ff00ff);
     margin: 15px auto;
-    border-radius: 2px;
+    border-radius: 3px;
+    animation: underlinePulse 2s infinite;
+}
+
+@keyframes underlinePulse {
+    0%, 100% { opacity: 0.5; width: 80px; }
+    50% { opacity: 1; width: 120px; }
 }
 
 /* Сетка каталога */
@@ -80,19 +122,22 @@
     margin: 0 auto;
 }
 
-/* Карточки товаров */
+/* Карточки товаров - стеклянный неон */
 .product-card {
-    background: white;
+    background: rgba(10, 10, 20, 0.7);
+    backdrop-filter: blur(10px);
     border-radius: 24px;
     overflow: hidden;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     cursor: pointer;
+    border: 1px solid rgba(255, 0, 255, 0.3);
 }
 
 .product-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    box-shadow: 0 0 30px rgba(255, 0, 255, 0.4), 0 20px 40px rgba(0,0,0,0.4);
+    border-color: #00ffff;
 }
 
 .img-container {
@@ -112,26 +157,29 @@
     transform: scale(1.08);
 }
 
+/* Неоновый бейдж */
 .badge {
     position: absolute;
     top: 15px;
     left: 15px;
-    background: rgba(255, 71, 87, 0.95);
+    background: linear-gradient(135deg, #ff00ff, #bf00ff);
     color: white;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.7rem;
     font-weight: 600;
+    box-shadow: 0 0 10px rgba(255,0,255,0.5);
 }
 
 .info {
     padding: 1.5rem;
 }
 
+/* Неоновая категория */
 .category-tag {
     display: inline-block;
-    background: rgba(255, 71, 87, 0.1);
-    color: #ff4757;
+    background: rgba(255, 0, 255, 0.15);
+    color: #ff00ff;
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.7rem;
@@ -143,15 +191,16 @@
     font-size: 1.2rem;
     margin: 0.5rem 0;
     font-weight: 700;
+    color: #fff;
 }
 
 .size-info {
     font-size: 0.85rem;
-    color: #666;
+    color: #aaa;
     margin: 8px 0;
     padding: 4px 0;
-    border-top: 1px solid #f0f0f0;
-    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 .price-wrapper {
@@ -165,20 +214,21 @@
 .price {
     font-size: 1.5rem;
     font-weight: 800;
-    color: #ff4757;
+    color: #ff00ff;
+    text-shadow: 0 0 5px rgba(255,0,255,0.5);
 }
 
 .price-hint {
     font-size: 0.75rem;
-    color: #28a745;
+    color: #00ffff;
     font-weight: 500;
 }
 
-/* Кнопка обсуждения */
+/* Кнопка обсуждения - неоновая */
 .discuss-btn {
     width: 100%;
     padding: 0.9rem;
-    background: #ff4757;
+    background: linear-gradient(135deg, #ff00ff, #bf00ff);
     color: white;
     border: none;
     border-radius: 50px;
@@ -191,12 +241,13 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+    box-shadow: 0 0 10px rgba(255,0,255,0.5);
 }
 
 .discuss-btn:hover {
-    background: #ff6b81;
+    background: linear-gradient(135deg, #ff44ff, #df44ff);
     transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255,0,255,0.8);
 }
 
 /* Модальная кнопка */
@@ -204,22 +255,23 @@
     display: inline-block;
     margin-top: 25px;
     padding: 12px 28px;
-    background: #ff4757;
+    background: linear-gradient(135deg, #ff00ff, #bf00ff);
     color: white;
     text-decoration: none;
     border-radius: 50px;
     font-weight: 700;
     font-size: 1rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
+    box-shadow: 0 0 15px rgba(255,0,255,0.5);
 }
 
 .modal-contact-btn:hover {
-    background: #ff6b81;
+    background: linear-gradient(135deg, #ff44ff, #df44ff);
     transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(255,0,255,0.8);
 }
 
-/* Фильтры */
+/* Фильтры - неоновые */
 .filter-bar {
     display: flex;
     justify-content: center;
@@ -231,38 +283,43 @@
 
 .filter-btn {
     padding: 10px 24px;
-    background: white;
-    border: 2px solid #e0e0e0;
+    background: rgba(10, 10, 20, 0.8);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 0, 255, 0.3);
     border-radius: 50px;
     font-weight: 600;
     font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #666;
+    color: #fff;
 }
 
 .filter-btn:hover {
-    border-color: #ff4757;
-    color: #ff4757;
+    border-color: #ff00ff;
+    color: #ff00ff;
+    box-shadow: 0 0 10px rgba(255,0,255,0.3);
 }
 
 .filter-btn.active {
-    background: #ff4757;
-    border-color: #ff4757;
+    background: linear-gradient(135deg, #ff00ff, #bf00ff);
+    border-color: #ff00ff;
     color: white;
+    box-shadow: 0 0 15px rgba(255,0,255,0.5);
 }
 
-/* Статистика */
+/* Статистика - неоновая */
 .stats-bar {
     display: flex;
     justify-content: center;
     gap: 40px;
     margin-top: 50px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.15);
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
     border-radius: 60px;
     flex-wrap: wrap;
+    border: 1px solid rgba(255, 0, 255, 0.3);
+    box-shadow: 0 0 20px rgba(255,0,255,0.2);
 }
 
 .stat-item {
@@ -275,11 +332,14 @@
 .stat-number {
     font-size: 2rem;
     font-weight: 800;
+    color: #ff00ff;
+    text-shadow: 0 0 10px rgba(255,0,255,0.5);
 }
 
 .stat-label {
     font-size: 0.8rem;
     opacity: 0.8;
+    color: #00ffff;
 }
 
 /* Анимации */
@@ -303,7 +363,18 @@
     transform: translateY(0);
 }
 
-/* Адаптив - на 768px две колонки, на 480px одна */
+/* Модальное окно - тёмная тема */
+.modal-content {
+    background: linear-gradient(135deg, #1a1a2e, #0a0a15);
+    border: 1px solid rgba(255,0,255,0.3);
+    box-shadow: 0 0 50px rgba(255,0,255,0.2);
+}
+
+.modal-content h3, .modal-brand, .modal-size, .modal-category {
+    color: #fff;
+}
+
+/* Адаптив */
 @media (max-width: 768px) {
     .hero { height: 70vh; margin-top: 60px; }
     .hero-content h1 { font-size: 2.2rem; }
@@ -314,8 +385,9 @@
     .price { font-size: 1.2rem; }
     .discuss-btn { padding: 0.7rem; font-size: 0.85rem; }
     .filter-btn { padding: 8px 16px; font-size: 0.8rem; }
+    .stats-bar { gap: 20px; padding: 15px 30px; }
+    .stat-number { font-size: 1.5rem; }
     
-    /* На планшете - 2 колонки */
     .catalog-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
@@ -330,8 +402,10 @@
     .discuss-btn { padding: 0.6rem; font-size: 0.8rem; }
     .filter-bar { gap: 8px; }
     .filter-btn { padding: 6px 12px; font-size: 0.7rem; }
+    .stats-bar { gap: 15px; padding: 10px 20px; }
+    .stat-number { font-size: 1.2rem; }
+    .stat-label { font-size: 0.65rem; }
     
-    /* На телефоне - 1 колонка */
     .catalog-grid {
         grid-template-columns: 1fr;
         gap: 25px;
