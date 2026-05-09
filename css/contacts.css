@@ -1,5 +1,5 @@
 /* ========================================
-   CONTACTS PAGE STYLES
+   CONTACTS PAGE - НЕОНОВАЯ ВЕРСИЯ
    ======================================== */
 
 .container {
@@ -21,23 +21,55 @@
     text-align: center;
     color: white;
     margin-top: 70px;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,0,255,0.1) 0%, transparent 70%);
+    animation: rotateGlow 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotateGlow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content h1 {
     font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+    animation: glitchContact 3s infinite;
+}
+
+@keyframes glitchContact {
+    0%, 100% { text-shadow: -1px 0 #00ffff, 1px 0 #ff00ff; }
+    50% { text-shadow: 1px 0 #00ffff, -1px 0 #ff00ff; }
 }
 
 .hero-content p {
     font-size: 1.1rem;
     opacity: 0.9;
+    text-shadow: 0 0 5px rgba(0,255,255,0.5);
 }
 
 /* About Section */
 .about-section {
     padding: 80px 0;
-    background: white;
+    background: rgba(10, 10, 20, 0.9);
 }
 
 .about-grid {
@@ -51,6 +83,10 @@
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 20px;
+    background: linear-gradient(135deg, #fff, #ff00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     position: relative;
     display: inline-block;
 }
@@ -62,18 +98,19 @@
     left: 0;
     width: 60px;
     height: 3px;
-    background: #ff4757;
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
 }
 
 .about-text h3 {
     font-size: 1.3rem;
     margin: 30px 0 15px;
-    color: #ff4757;
+    color: #ff00ff;
+    text-shadow: 0 0 5px rgba(255,0,255,0.3);
 }
 
 .about-text p {
     line-height: 1.7;
-    color: #555;
+    color: #ccc;
 }
 
 .advantages-list {
@@ -86,30 +123,34 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(255,0,255,0.2);
+    color: #ddd;
 }
 
 .advantages-list li::before {
     content: '✓';
-    color: #ff4757;
+    color: #ff00ff;
     font-weight: bold;
+    text-shadow: 0 0 5px rgba(255,0,255,0.5);
 }
 
 .about-image img {
     width: 100%;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 0 30px rgba(255,0,255,0.2);
     transition: all 0.3s ease;
+    border: 1px solid rgba(255,0,255,0.3);
 }
 
 .about-image img:hover {
     transform: scale(1.02);
+    box-shadow: 0 0 50px rgba(255,0,255,0.4);
 }
 
 /* Delivery Section */
 .delivery-section {
     padding: 80px 0;
-    background: #f8f9fa;
+    background: rgba(5, 5, 15, 0.9);
 }
 
 .section-title {
@@ -120,14 +161,18 @@
 .section-title h2 {
     font-size: 2rem;
     font-weight: 700;
-    color: #1a1a2e;
+    background: linear-gradient(135deg, #fff, #ff00ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 .underline {
     width: 60px;
     height: 3px;
-    background: #ff4757;
+    background: linear-gradient(90deg, #ff00ff, #00ffff);
     margin: 15px auto 0;
+    border-radius: 3px;
 }
 
 .delivery-grid {
@@ -138,41 +183,43 @@
 
 .delivery-item {
     text-align: center;
-    padding: 20px 12px;
-    background: white;
+    padding: 25px 15px;
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(5px);
     border-radius: 20px;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,0,255,0.2);
 }
 
 .delivery-item:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 0 30px rgba(255,0,255,0.3);
+    border-color: #ff00ff;
 }
 
 .delivery-icon {
     font-size: 2rem;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 .delivery-item h3 {
-    font-size: 0.95rem;
-    margin-bottom: 8px;
+    font-size: 1rem;
+    margin-bottom: 10px;
     font-weight: 600;
+    color: #ff00ff;
 }
 
 .delivery-item p {
     font-size: 0.75rem;
-    color: #6c757d;
+    color: #ccc;
     line-height: 1.4;
 }
 
-/* ========================================
-   CONTACTS SECTION - КОНТАКТЫ (Даниил и Павел)
-   ======================================== */
+/* Contacts Section */
 .contacts-section {
     padding: 80px 0;
-    background: white;
+    background: rgba(10, 10, 20, 0.9);
 }
 
 .contacts-grid {
@@ -184,120 +231,112 @@
 }
 
 .contact-card {
-    background: white;
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(5px);
     border-radius: 20px;
-    padding: 20px 20px 15px 20px;
+    padding: 30px 25px;
     text-align: center;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.05);
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
+    border: 1px solid rgba(255,0,255,0.2);
 }
 
 .contact-card:hover {
     transform: translateY(-5px);
-    border-color: #ff4757;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border-color: #ff00ff;
+    box-shadow: 0 0 30px rgba(255,0,255,0.3);
 }
 
 .contact-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, #fff5f5, #ffe0e0);
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, rgba(255,0,255,0.2), rgba(191,0,255,0.1));
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 12px;
-    font-size: 1.8rem;
+    margin: 0 auto 15px;
+    font-size: 2rem;
+    border: 1px solid rgba(255,0,255,0.3);
 }
 
 .contact-card h3 {
     font-size: 1.3rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    color: #1a1a2e;
+    margin-bottom: 15px;
+    color: #fff;
 }
 
 .contact-links {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin-top: auto;
-    margin-bottom: 5px;
 }
 
 .contact-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    padding: 12px 16px;
-    border-radius: 60px;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 50px;
     text-decoration: none;
-    font-weight: 700;
-    font-size: 0.9rem;
+    font-weight: 600;
     transition: all 0.3s ease;
-    width: 100%;
-    box-sizing: border-box;
-    white-space: nowrap;
+    font-size: 0.85rem;
 }
 
 .contact-btn.telegram {
-    background: #0088cc;
+    background: linear-gradient(135deg, #0088cc, #006699);
     color: white;
+    box-shadow: 0 0 10px rgba(0,136,204,0.5);
 }
 
 .contact-btn.telegram:hover {
-    background: #006699;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0,136,204,0.8);
 }
 
 .contact-btn.phone {
-    background: #28a745;
+    background: linear-gradient(135deg, #28a745, #1e7e34);
     color: white;
+    box-shadow: 0 0 10px rgba(40,167,69,0.5);
 }
 
 .contact-btn.phone:hover {
-    background: #1e7e34;
-    transform: translateY(-3px);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(40,167,69,0.8);
 }
 
 .operator-badge {
     display: inline-block;
-    padding: 5px 12px;
-    background: #f0f0f0;
+    padding: 4px 12px;
+    background: rgba(255,0,255,0.15);
     border-radius: 30px;
     font-size: 0.7rem;
-    font-weight: 700;
-    color: #ff4757;
-    margin-top: 8px;
-    margin-bottom: 0px;
-    width: fit-content;
-    align-self: center;
+    font-weight: 600;
+    color: #ff00ff;
+    margin-top: 10px;
 }
 
 .operator-badge.mts {
-    color: #e63946;
+    color: #00ffff;
 }
 
 .info-message {
-    background: #fff3cd;
-    border-left: 4px solid #ffc107;
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #ff00ff;
     padding: 15px;
     border-radius: 12px;
     margin-top: 40px;
     max-width: 800px;
     margin: 40px auto 0;
     font-size: 0.9rem;
+    color: #ddd;
 }
 
 /* Социальные сети */
 .social-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, #f5f7fa 0%, #eef2f7 100%);
+    background: rgba(5, 5, 15, 0.9);
 }
 
 .social-grid {
@@ -309,14 +348,14 @@
 }
 
 .social-card {
-    background: white;
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(5px);
     border-radius: 20px;
     padding: 25px 15px;
     text-align: center;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(255,0,255,0.2);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -325,7 +364,8 @@
 
 .social-card:hover {
     transform: translateY(-8px);
-    border-color: #ff4757;
+    border-color: #ff00ff;
+    box-shadow: 0 0 30px rgba(255,0,255,0.3);
 }
 
 .social-icon {
@@ -335,6 +375,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 0 10px rgba(255,0,255,0.3);
 }
 
 .social-icon.instagram {
@@ -361,20 +402,20 @@
 .social-card h3 {
     font-size: 1rem;
     font-weight: 700;
-    color: #1a1a2e;
+    color: #fff;
     margin: 0;
 }
 
 .social-card p {
     font-size: 0.75rem;
-    color: #6c757d;
+    color: #ccc;
     margin: 0;
 }
 
 .social-follow {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #ff4757;
+    color: #ff00ff;
     display: flex;
     align-items: center;
     gap: 5px;
@@ -383,12 +424,13 @@
 
 .social-card:hover .social-follow {
     gap: 10px;
+    text-shadow: 0 0 5px rgba(255,0,255,0.5);
 }
 
 /* FAQ Section */
 .faq-section {
     padding: 80px 0;
-    background: #f8f9fa;
+    background: rgba(10, 10, 20, 0.9);
 }
 
 .faq-grid {
@@ -397,12 +439,18 @@
 }
 
 .faq-item {
-    background: white;
+    background: rgba(20, 20, 40, 0.7);
+    backdrop-filter: blur(5px);
     border-radius: 12px;
     margin-bottom: 15px;
     overflow: hidden;
     transition: all 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255,0,255,0.2);
+}
+
+.faq-item:hover {
+    transform: translateX(5px);
+    border-color: #ff00ff;
 }
 
 .faq-question {
@@ -414,16 +462,17 @@
     justify-content: space-between;
     align-items: center;
     transition: all 0.3s ease;
+    color: #fff;
 }
 
 .faq-question:hover {
-    background: rgba(255, 71, 87, 0.05);
+    background: rgba(255, 0, 255, 0.1);
 }
 
 .faq-question::after {
     content: '+';
     font-size: 1.2rem;
-    color: #ff4757;
+    color: #ff00ff;
 }
 
 .faq-item.active .faq-question::after {
@@ -433,24 +482,28 @@
 .faq-answer {
     padding: 0 18px 18px;
     display: none;
-    color: #6c757d;
+    color: #ccc;
     font-size: 0.85rem;
     line-height: 1.5;
 }
 
 .faq-item.active .faq-answer {
     display: block;
+    animation: fadeInAnswer 0.3s ease;
 }
 
-/* ========== АДАПТИВ - УМЕНЬШАЕМ ТОЛЬКО ТЕКСТ НА ТЕЛЕФОНЕ ========== */
+@keyframes fadeInAnswer {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
+/* Адаптив */
 @media (max-width: 1024px) {
     .hero { margin-top: 60px; }
     .hero-content h1 { font-size: 2.5rem; }
     .about-grid { gap: 40px; }
     .delivery-grid { gap: 15px; }
     .social-grid { gap: 15px; }
-    .container { padding: 0 4%; }
 }
 
 @media (max-width: 768px) {
@@ -461,66 +514,20 @@
     .about-image { order: -1; }
     .container { padding: 0 4%; }
     
-    /* Доставка - 2 колонки */
     .delivery-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    
-    /* Соцсети - 2 колонки */
-    .social-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 650px) {
-    .delivery-item {
-        padding: 15px 10px;
-    }
-    .delivery-icon {
-        font-size: 1.6rem;
-    }
-    .delivery-item h3 {
-        font-size: 0.85rem;
-    }
-    .delivery-item p {
-        font-size: 0.7rem;
-    }
-    .social-card {
-        padding: 15px 12px;
-    }
-    .social-icon {
-        width: 45px;
-        height: 45px;
-    }
-    .social-icon img {
-        width: 25px !important;
-        height: 25px !important;
-    }
-    .social-card h3 {
-        font-size: 0.85rem;
-    }
-    .social-card p {
-        font-size: 0.7rem;
-    }
-    .social-follow {
-        font-size: 0.7rem;
-    }
-}
-
-@media (max-width: 550px) {
-    .contacts-grid {
         gap: 15px;
     }
     
-    /* УМЕНЬШАЕМ ТЕКСТ НА ТЕЛЕФОНЕ, НО КНОПКА ОСТАЁТСЯ ТОЙ ЖЕ */
-    .contact-btn {
-        font-size: 0.75rem;
-        gap: 8px;
+    .social-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
     }
     
-    .operator-badge {
-        font-size: 0.65rem;
-    }
+    .delivery-item { padding: 15px 10px; }
+    .social-card { padding: 15px 12px; }
+    .social-icon { width: 45px; height: 45px; }
+    .social-icon img { width: 25px !important; height: 25px !important; }
 }
 
 @media (max-width: 480px) {
@@ -529,103 +536,36 @@
     .section-title h2 { font-size: 1.6rem; }
     .container { padding: 0 3%; }
     
-    .delivery-grid {
-        gap: 10px;
-    }
-    .delivery-item {
-        padding: 12px 8px;
-    }
-    .delivery-icon {
-        font-size: 1.4rem;
-    }
-    .delivery-item h3 {
-        font-size: 0.75rem;
-    }
-    .delivery-item p {
-        font-size: 0.65rem;
-    }
+    .delivery-grid { gap: 10px; }
+    .delivery-item { padding: 12px 8px; }
+    .delivery-icon { font-size: 1.4rem; }
+    .delivery-item h3 { font-size: 0.75rem; }
+    .delivery-item p { font-size: 0.65rem; }
     
-    .social-grid {
-        gap: 10px;
+    .contacts-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
-    .social-card {
-        padding: 12px 8px;
-    }
-    .social-icon {
-        width: 40px;
-        height: 40px;
-    }
-    .social-icon img {
-        width: 22px !important;
-        height: 22px !important;
-    }
-    .social-card h3 {
-        font-size: 0.75rem;
-    }
-    .social-card p {
-        font-size: 0.65rem;
-    }
-    .social-follow {
-        font-size: 0.65rem;
-    }
+    .contact-card { padding: 25px 20px; }
+    .contact-icon { width: 60px; height: 60px; font-size: 1.6rem; }
+    .contact-card h3 { font-size: 1.2rem; }
+    .contact-btn { font-size: 0.8rem; padding: 8px 12px; }
     
-    /* ЕЩЁ МЕНЬШЕ ТЕКСТ НА МАЛЕНЬКИХ ТЕЛЕФОНАХ */
-    .contact-btn {
-        font-size: 0.7rem;
-        gap: 6px;
-    }
+    .social-grid { gap: 10px; }
+    .social-card { padding: 12px 8px; }
+    .social-icon { width: 40px; height: 40px; }
+    .social-icon img { width: 22px !important; height: 22px !important; }
+    .social-card h3 { font-size: 0.75rem; }
     
-    .operator-badge {
-        font-size: 0.6rem;
-        padding: 3px 8px;
-    }
-    
-    .faq-question {
-        font-size: 0.85rem;
-        padding: 15px;
-    }
-    .faq-answer {
-        font-size: 0.75rem;
-        padding: 0 15px 15px;
-    }
-    .info-message {
-        font-size: 0.8rem;
-        padding: 12px;
-    }
+    .faq-question { font-size: 0.85rem; padding: 15px; }
+    .faq-answer { font-size: 0.75rem; padding: 0 15px 15px; }
+    .info-message { font-size: 0.8rem; padding: 12px; }
 }
 
 @media (max-width: 380px) {
-    .contacts-grid {
-        gap: 10px;
-    }
-    
-    /* САМЫЙ МАЛЕНЬКИЙ ТЕКСТ */
-    .contact-btn {
-        font-size: 0.6rem;
-        gap: 5px;
-    }
-    
-    .operator-badge {
-        font-size: 0.55rem;
-        padding: 2px 6px;
-    }
-    
-    .delivery-item {
-        padding: 10px 6px;
-    }
-    .delivery-icon {
-        font-size: 1.2rem;
-    }
-    .delivery-item h3 {
-        font-size: 0.7rem;
-    }
-    .delivery-item p {
-        font-size: 0.6rem;
-    }
-    .social-card {
-        padding: 10px 6px;
-    }
-    .social-card h3 {
-        font-size: 0.7rem;
-    }
+    .delivery-item { padding: 10px 6px; }
+    .delivery-icon { font-size: 1.2rem; }
+    .delivery-item h3 { font-size: 0.7rem; }
+    .social-card { padding: 10px 6px; }
+    .social-card h3 { font-size: 0.7rem; }
 }
