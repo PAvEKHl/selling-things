@@ -578,3 +578,18 @@
     .faq-answer { font-size: 0.75rem; padding: 0 15px 15px; }
     .info-message { font-size: 0.8rem; padding: 12px; }
     .advantages-list li {
+        font-size: 0.75rem;
+        padding: 8px 0;
+    }
+}
+
+@media (max-width: 380px) {
+    .delivery-item { padding: 10px 6px; }
+    .delivery-icon { font-size: 1.2rem; }
+    .delivery-item h3 { font-size: 0.7rem; }
+    .delivery-item p { font-size: 0.6rem; }
+    .social-card { padding: 10px 6px; }
+    .social-card h3 { font-size: 0.7rem; }
+    .social-card p { font-size: 0.6rem; }
+    .social-follow { font-size: 0.6rem; }
+}
