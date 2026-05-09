@@ -8,10 +8,10 @@
     padding: 0 5%;
 }
 
-/* Hero секция */
+/* Hero секция - ОДИНАКОВАЯ для всех устройств */
 .hero {
     height: 40vh;
-    background: linear-gradient(135deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), 
+    background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), 
                 url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1350&q=80');
     background-size: cover;
     background-position: center;
