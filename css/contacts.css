@@ -8,13 +8,14 @@
     padding: 0 5%;
 }
 
-/* Hero секция - ОДИНАКОВАЯ для всех устройств */
+/* Hero секция - с картинкой phoenix.jpg */
 .hero {
-    height: 60vh;
+    height: 50vh;
     background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.4)), 
-                url('https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1350&q=80');
+                url('../images/phoenix.jpg');
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,6 +65,31 @@
     font-size: 1.1rem;
     opacity: 0.9;
     text-shadow: 0 0 5px rgba(0,255,255,0.5);
+}
+
+/* ========== ДЛЯ ТЕЛЕФОНОВ - СМЕЩАЕМ НАДПИСЬ PHONEX ВНИЗ ========== */
+@media (max-width: 768px) {
+    .hero-content {
+        transform: translateY(30px);
+    }
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content {
+        transform: translateY(50px);
+    }
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+    .hero-content p {
+        font-size: 0.8rem;
+    }
 }
 
 /* About Section */
@@ -503,15 +529,13 @@
 /* Адаптив */
 @media (max-width: 1024px) {
     .hero { margin-top: 60px; }
-    .hero-content h1 { font-size: 2.5rem; }
     .about-grid { gap: 40px; }
     .delivery-grid { gap: 15px; }
     .social-grid { gap: 15px; }
 }
 
 @media (max-width: 768px) {
-    .hero { height: 35vh; }
-    .hero-content h1 { font-size: 2rem; }
+    .hero { height: 40vh; }
     .about-section, .delivery-section, .contacts-section, .social-section, .faq-section { padding: 50px 0; }
     .about-grid { grid-template-columns: 1fr; }
     .about-image { order: -1; }
@@ -546,8 +570,7 @@
 }
 
 @media (max-width: 480px) {
-    .hero { height: 30vh; margin-top: 60px; }
-    .hero-content h1 { font-size: 1.5rem; }
+    .hero { height: 35vh; margin-top: 60px; }
     .section-title h2 { font-size: 1.6rem; }
     .container { padding: 0 3%; }
     
