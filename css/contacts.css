@@ -105,9 +105,11 @@
     align-items: center;
 }
 
+/* === ИСПРАВЛЕННЫЙ БЛОК about-text === */
 .about-text {
-    width: 100%; 
+    width: 100%;
 }
+
 .about-text h2 {
     font-size: 2.2rem;
     font-weight: 700;
@@ -143,9 +145,11 @@
     text-align: left;
     width: 100%;
 }
+
 .advantages-list {
     list-style: none;
     margin-top: 20px;
+    width: 100%;
 }
 
 .advantages-list li {
@@ -157,6 +161,7 @@
     color: #ddd;
     font-size: 0.9rem;
     line-height: 1.4;
+    width: 100%;
 }
 
 .advantages-list li::before {
@@ -166,6 +171,7 @@
     text-shadow: 0 0 5px rgba(255,0,255,0.5);
     flex-shrink: 0;
 }
+/* === КОНЕЦ ИСПРАВЛЕННОГО БЛОКА === */
 
 .about-image img {
     width: 100%;
