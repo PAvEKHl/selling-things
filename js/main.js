@@ -14,15 +14,6 @@ const items = [
         brand: "Dior",
         img: "images/Dior.jpg"
     },
-     {
-        name: "Футболка Adidas",
-        size: "L",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "Adidas",
-        img: "images/adidas T-shirt.jpg"
-    },
     {
         name: "худи с сердцем(серое)",
         size: "L",
