@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MAIN PAGE SPECIFIC - Каталог, фильтры и модальное окно
+   MAIN PAGE SPECIFIC - Каталог, фильтры и модальное окно (main.js)
    ========================================================================== */
 
 const BYN_TO_RUB = 26;
@@ -72,31 +72,38 @@ function loadProducts() {
                     <div class="price">${product.price} ${product.currency}</div>
                     <div class="price-hint">≈ ${formattedPrice}</div>
                 </div>
-                <button class="discuss-btn" data-name="${product.name}" data-price="${formattedPrice}">
+                <button class="discuss-btn">
                     💬 Обсудить покупку
                 </button>
             </div>
         `;
         
-        card.addEventListener('click', (e) => {
-            if (e.target.classList.contains('discuss-btn')) return;
-            openModal(product);
-        });
-        
+        // НАДЕЖНЫЙ КЛИК ПО КНОПКЕ «ОБСУДИТЬ ПОКУПКУ»
         const btn = card.querySelector('.discuss-btn');
         btn.addEventListener('click', (e) => {
-            e.stopPropagation();
+            e.preventDefault();
+            e.stopPropagation(); // Полностью изолируем клик по кнопке от карточки
             
             if (tg.initData) {
+                // Если мы в Telegram WebApp
                 const orderData = { title: product.name, cost: formattedPrice };
                 tg.sendData(JSON.stringify(orderData));
             } else {
+                // Если мы в обычном браузере
                 saveSelectedProduct(product.name, formattedPrice);
                 const contactsSection = document.getElementById('contacts');
                 if (contactsSection) {
                     contactsSection.scrollIntoView({ behavior: 'smooth' });
                 }
             }
+        });
+
+        // КЛИК ПО САМОЙ КАРТОЧКЕ (ОТКРЫТИЕ МОДАЛКИ)
+        card.addEventListener('click', (e) => {
+            // Если кликнули на кнопку обсуждения или её внутренности — модалку НЕ открываем
+            if (e.target.closest('.discuss-btn')) return;
+            
+            openModal(product);
         });
         
         grid.appendChild(card);
