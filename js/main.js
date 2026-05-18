@@ -15,7 +15,7 @@ if (tg.initData) {
 const items = [
     { name: "Футболка Dior", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Dior", img: "images/Dior.jpg" },
     { name: "худи с сердцем(серое)", size: "L", price: "90", currency: "бун", category: "Футболки и майки", brand: "", img: "images/hoodie grey.jpg" },
-    { name: "Кроссовки Lanvin", size: "42", price: "200", currency: "бун", category: "Кроссовки", brand: "Lanvin", img: "images/Lanvin.jpg" },
+    { name: "Кроссовки Lanvin", size: "42", price: "155", currency: "бун", category: "Кроссовки", brand: "Lanvin", img: "images/Lanvin.jpg" },
     { name: "C.P. Company (белая)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_White.jpg" },
     { name: "C.P. Company (чёрная)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_Black.jpg" },
     { name: "MM6 Maison Margiela (чёрная)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "MM6", img: "images/Masion_Margela_Black.jpg" },
