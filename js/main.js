@@ -334,32 +334,4 @@ function saveSelectedProduct(title, description) {
     updateContactLinks();
 }
 
-// Функция, которая переписывает ссылки в Telegram, добавляя туда текст заказа
-function updateContactLinks() {
-    const savedProduct = localStorage.getItem('selectedProduct');
-    
-    if (savedProduct) {
-        const product = JSON.parse(savedProduct);
-        
-        // Формируем текст сообщения для лички
-        const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.title}\n📝 Описание: ${product.description}`;
-        const encodedText = encodeURIComponent(messageText);
-        
-        // Находим наши кнопки по ID
-        const pavelBtn = document.getElementById('link-pavel');
-        const daniilBtn = document.getElementById('link-daniil');
-        
-        // Обновляем ссылки на Telegram, телефоны при этом не затрагиваются
-        if (pavelBtn) {
-            pavelBtn.href = `https://t.me/PavelHlebko?text=${encodedText}`;
-        }
-        if (daniilBtn) {
-            daniilBtn.href = `https://t.me/Kamelot709?text=${encodedText}`;
-        }
-    }
-}
 
-// Проверяем наличие выбранного товара при каждой загрузке страницы
-document.addEventListener("DOMContentLoaded", function() {
-    updateContactLinks();
-});
