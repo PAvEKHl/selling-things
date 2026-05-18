@@ -1,5 +1,5 @@
 /* ==========================================================================
-   MAIN PAGE SPECIFIC & CONTACTS LOGIC — PHOENIX WEAR
+   MAIN PAGE SPECIFIC - Каталог, фильтры и модальное окно
    ========================================================================== */
 
 const BYN_TO_RUB = 26;
@@ -7,121 +7,30 @@ const BYN_TO_RUB = 26;
 // Инициализация Telegram WebApp
 const tg = window.Telegram.WebApp;
 
-// Если открыто внутри Telegram, добавляем класс для скрытия лишних блоков
 if (tg.initData) {
     document.body.classList.add('telegram-view');
 }
 
-// Массив товаров каталога
+// Массив товаров
 const items = [
-    {
-        name: "Футболка Dior",
-        size: "L",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "Dior",
-        img: "images/Dior.jpg"
-    },
-    {
-        name: "худи с сердцем(серое)",
-        size: "L",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "",
-        img: "images/hoodie grey.jpg"
-    },
-    {
-        name: "Футболка Vans (чёрная)",
-        size: "L",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "Vans",
-        img: "images/Vans_Black.jpg"
-    },
-    {
-        name: "Кроссовки Lanvin",
-        size: "42",
-        price: "200",
-        currency: "бун",
-        category: "Кроссовки",
-        brand: "Lanvin",
-        img: "images/Lanvin.jpg"
-    },
-    {
-        name: "C.P. Company (белая)",
-        size: "L-XL",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "C.P. Company",
-        img: "images/C.P.Company_White.jpg"
-    },
-    {
-        name: "C.P. Company (чёрная)",
-        size: "L-XL",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "C.P. Company",
-        img: "images/C.P.Company_Black.jpg"
-    },
-    {
-        name: "MM6 Maison Margiela (белая)",
-        size: "L",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "MM6",
-        img: "images/Masion_Margela_Whity.jpg"
-    },
-    {
-        name: "MM6 Maison Margiela (чёрная)",
-        size: "L",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "MM6",
-        img: "images/Masion_Margela_Black.jpg"
-    },
-    {
-        name: "Футболка 'Цветущая сакура'",
-        size: "L",
-        price: "40",
-        currency: "бун",
-        category: "Футболки и майки",
-        brand: "Artwear",
-        img: "images/sakura.jpg"
-    },
-    {
-        name: "Джинсы Dime",
-        size: "L",
-        price: "85",
-        currency: "бун",
-        category: "Джинсы",
-        brand: "Dime",
-        img: "images/Diime.jpg"
-    },
-    {
-        name: "Джинсы Dime",
-        size: "L",
-        price: "85",
-        currency: "бун",
-        category: "Джинсы",
-        brand: "Dime",
-        img: "images/JeansDimeWhite.jpg"
-    },
+    { name: "Футболка Dior", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Dior", img: "images/Dior.jpg" },
+    { name: "худи с сердцем(серое)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "", img: "images/hoodie grey.jpg" },
+    { name: "Футболка Vans (чёрная)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Vans", img: "images/Vans_Black.jpg" },
+    { name: "Кроссовки Lanvin", size: "42", price: "200", currency: "бун", category: "Кроссовки", brand: "Lanvin", img: "images/Lanvin.jpg" },
+    { name: "C.P. Company (белая)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_White.jpg" },
+    { name: "C.P. Company (чёрная)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_Black.jpg" },
+    { name: "MM6 Maison Margiela (белая)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "MM6", img: "images/Masion_Margela_Whity.jpg" },
+    { name: "MM6 Maison Margiela (чёрная)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "MM6", img: "images/Masion_Margela_Black.jpg" },
+    { name: "Футболка 'Цветущая сакура'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Artwear", img: "images/sakura.jpg" },
+    { name: "Джинсы Dime", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/Diime.jpg" },
+    { name: "Джинсы Dime", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/JeansDimeWhite.jpg" }
 ];
 
-// Конвертер валюты
 function convertToRUB(priceBYN) {
-    const priceNum = parseInt(priceBYN);
-    return Math.round(priceNum * BYN_TO_RUB);
+    return Math.round(parseInt(priceBYN) * BYN_TO_RUB);
 }
 
-// Запоминание выбранного товара и динамическое обновление ссылок
+// Вспомогательная функция для сохранения выбранного товара
 function saveSelectedProduct(productName, productPrice) {
     const productData = {
         title: productName,
@@ -129,11 +38,13 @@ function saveSelectedProduct(productName, productPrice) {
     };
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
     
-    // Сразу же пересчитываем ссылки в секции контактов
-    updateContactLinks();
+    // Вызываем функцию обновления ссылок из global.js, если она доступна
+    if (typeof updateContactLinks === 'function') {
+        updateContactLinks();
+    }
 }
 
-// Генерация карточек товаров на главной странице
+// Генерация карточек товаров
 function loadProducts() {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
@@ -167,31 +78,23 @@ function loadProducts() {
             </div>
         `;
         
-        // Клик по самой карточке открывает модалку
         card.addEventListener('click', (e) => {
             if (e.target.classList.contains('discuss-btn')) return;
             openModal(product);
         });
         
-        // Клик по кнопке «Обсудить покупку» на карточке
         const btn = card.querySelector('.discuss-btn');
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             
             if (tg.initData) {
-                const orderData = {
-                    title: product.name,
-                    cost: formattedPrice
-                };
+                const orderData = { title: product.name, cost: formattedPrice };
                 tg.sendData(JSON.stringify(orderData));
             } else {
-                // Сохраняем товар в память и скроллим к блоку контактов
                 saveSelectedProduct(product.name, formattedPrice);
                 const contactsSection = document.getElementById('contacts');
                 if (contactsSection) {
                     contactsSection.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    window.location.href = 'contacts.html#contacts';
                 }
             }
         });
@@ -199,7 +102,6 @@ function loadProducts() {
         grid.appendChild(card);
     });
     
-    // Анимация плавного появления карточек при скролле (IntersectionObserver)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -212,7 +114,7 @@ function loadProducts() {
     document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 }
 
-// Работа с модальным окном
+// Управление модальным окном
 const modal = document.getElementById('productModal');
 
 function openModal(product) {
@@ -231,7 +133,6 @@ function openModal(product) {
     
     const modalContactBtn = modal.querySelector('.modal-contact-btn');
     if (modalContactBtn) {
-        // Пересоздаем кнопку для очистки старых слушателей событий
         const newBtn = modalContactBtn.cloneNode(true);
         modalContactBtn.parentNode.replaceChild(newBtn, modalContactBtn);
         
@@ -240,10 +141,7 @@ function openModal(product) {
             newBtn.href = "#";
             newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const orderData = {
-                    title: product.name,
-                    cost: formattedPrice
-                };
+                const orderData = { title: product.name, cost: formattedPrice };
                 tg.sendData(JSON.stringify(orderData));
             });
         } else {
@@ -251,15 +149,12 @@ function openModal(product) {
             newBtn.href = "#contacts";
             newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                // Сохраняем вещь из модалки и плавно переходим к блоку контактов
                 saveSelectedProduct(product.name, formattedPrice);
                 modal.style.display = 'none';
                 
                 const contactsSection = document.getElementById('contacts');
                 if (contactsSection) {
                     contactsSection.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    window.location.href = 'contacts.html#contacts';
                 }
             });
         }
@@ -270,20 +165,16 @@ function openModal(product) {
 
 function initModal() {
     if (!modal) return;
-    
     const closeBtn = document.querySelector('.close-modal');
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
+        closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
     }
-    
     window.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
     });
 }
 
-// Фильтрация товаров каталога
+// Фильтры категорий
 function initFilters() {
     if (document.querySelector('.filter-bar')) return;
     
@@ -324,7 +215,7 @@ function initFilters() {
     });
 }
 
-// Статистика магазина в Hero-блок
+// Статистика
 function showStats() {
     if (document.querySelector('.stats-bar')) return;
     
@@ -333,18 +224,9 @@ function showStats() {
     
     const statsHTML = `
         <div class="stats-bar">
-            <div class="stat-item">
-                <span class="stat-number">${items.length}</span>
-                <span class="stat-label">товаров</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">${uniqueBrands.length}</span>
-                <span class="stat-label">брендов</span>
-            </div>
-            <div class="stat-item">
-                <span class="stat-number">${cheapItems}</span>
-                <span class="stat-label">до 50 бун</span>
-            </div>
+            <div class="stat-item"><span class="stat-number">${items.length}</span><span class="stat-label">товаров</span></div>
+            <div class="stat-item"><span class="stat-number">${uniqueBrands.length}</span><span class="stat-label">брендов</span></div>
+            <div class="stat-item"><span class="stat-number">${cheapItems}</span><span class="stat-label">до 50 бун</span></div>
         </div>
     `;
     
@@ -354,54 +236,19 @@ function showStats() {
     }
 }
 
-// ДИНАМИЧЕСКОЕ ОБНОВЛЕНИЕ ТЕКСТА ДЛЯ ВЕРСТКИ КОНТАКТОВ
-// Ищет ссылки внутри твоей оригинальной разметки <section id="contacts">
-function updateContactLinks() {
-    const telegramButtons = document.querySelectorAll('.contact-btn.telegram');
-    const savedProduct = localStorage.getItem('selectedProduct');
-    
-    if (savedProduct && telegramButtons.length > 0) {
-        try {
-            const product = JSON.parse(savedProduct);
-            const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.title}\n📝 ${product.description}`;
-            const encodedText = encodeURIComponent(messageText);
-            
-            telegramButtons.forEach(btn => {
-                const currentHref = btn.getAttribute('href');
-                
-                // Проверяем по юзернейму, чья именно это ссылка, чтобы не перепутать менеджеров
-                if (currentHref && currentHref.includes('Kamelot709')) {
-                    btn.href = `https://t.me/Kamelot709?text=${encodedText}`;
-                } else if (currentHref && currentHref.includes('PavelHlebko')) {
-                    btn.href = `https://t.me/PavelHlebko?text=${encodedText}`;
-                }
-            });
-        } catch (e) {
-            console.error("Ошибка парсинга localStorage:", e);
-        }
-    }
-}
-
-// Главный инициализатор скриптов страницы
+// Инициализация скриптов главной страницы
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     initModal();
     initFilters();
     showStats();
     
-    // Пересчитываем ссылки в готовой секции контактов, если товар уже был выбран ранее
-    updateContactLinks();
-    
-    // Инициализация FAQ
+    // Специфический аккордеон для FAQ
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
         if (question) {
-            question.addEventListener('click', () => {
-                item.classList.toggle('active');
-            });
+            question.addEventListener('click', () => { item.classList.toggle('active'); });
         }
     });
-
-    console.log('✅ Полная инициализация Phoenix Wear завершена.');
 });
