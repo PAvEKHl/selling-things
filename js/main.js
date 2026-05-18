@@ -130,6 +130,7 @@ function openModal(product) {
     const priceInRub = convertToRUB(product.price);
     const formattedPrice = priceInRub.toLocaleString() + " ₽";
     
+    // Заполнение данных в модалке
     document.getElementById('modalImg').src = product.img;
     document.getElementById('modalName').innerText = product.name;
     document.getElementById('modalCategory').innerHTML = `<span class="modal-category">${product.category}</span>`;
@@ -138,24 +139,42 @@ function openModal(product) {
     document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
     document.getElementById('modalRubHint').innerHTML = `≈ ${formattedPrice} рублей`;
     
-    const modalContactBtn = modal.querySelector('.modal-contact-btn');
+    // Ищем кнопку внутри модалки. И по старому классу, и по общему классу кнопок, чтобы точно найти!
+    let modalContactBtn = modal.querySelector('.modal-contact-btn') || modal.querySelector('.discuss-btn');
+    
     if (modalContactBtn) {
+        // Пересоздаем кнопку, чтобы стереть старые заглушки
         const newBtn = modalContactBtn.cloneNode(true);
         modalContactBtn.parentNode.replaceChild(newBtn, modalContactBtn);
         
+        // Формируем текст сообщения для прямой ссылки
+        const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.name}\n📝 Цена: ${formattedPrice}`;
+        const encodedText = encodeURIComponent(messageText);
+        
         if (tg.initData) {
-            newBtn.innerText = "💬 Обсудить покупку в боте";
+            newBtn.innerText = "💬 Обсудить покупку";
             newBtn.href = "#";
             newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
-                const orderData = { title: product.name, cost: formattedPrice };
-                tg.sendData(JSON.stringify(orderData));
+                e.stopPropagation();
+                
+                try {
+                    // Попытка №1: Отправить данные через WebApp
+                    const orderData = { title: product.name, cost: formattedPrice };
+                    tg.sendData(JSON.stringify(orderData));
+                } catch (error) {
+                    // Попытка №2: Если Telegram заблокировал sendData, шлем в личку Павла
+                    console.log("tg.sendData не поддерживается, перенаправляем в личку");
+                    window.location.href = `https://t.me/PavelHlebko?text=${encodedText}`;
+                }
             });
         } else {
+            // Если открыли в обычном браузере
             newBtn.innerText = "📞 Связаться для покупки";
             newBtn.href = "#contacts";
             newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 saveSelectedProduct(product.name, formattedPrice);
                 modal.style.display = 'none';
                 
