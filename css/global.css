@@ -373,3 +373,35 @@ footer {
     background: linear-gradient(90deg, var(--neon-pink), var(--neon-cyan));
     height: 2px;
 }
+
+/* =====================================================================
+   КНОПКА TELEGRAM В ЛЕВОМ НИЖНЕМ УГЛУ
+   ===================================================================== */
+.tg-floating-button {
+    position: fixed;
+    bottom: 25px;       /* Отступ от нижнего края экрана */
+    left: 25px;         /* Отступ от левого края экрана */
+    width: 60px;        /* Ширина кружка */
+    height: 60px;       /* Высота кружка */
+    background-color: #2481cc; /* Фирменный цвет Telegram */
+    border-radius: 50%; /* Делаем элемент круглым */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Тень для эффекта объема */
+    z-index: 1000;      /* Отображаем поверх всех элементов сайта */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+}
+
+/* Эффект при наведении курсора */
+.tg-floating-button:hover {
+    transform: scale(1.1); /* Слегка увеличиваем кружок */
+    background-color: #1a6baf; /* Делаем цвет чуть темнее */
+}
+
+/* Стили иконки внутри кружка */
+.tg-icon {
+    width: 32px;
+    height: 32px;
+    fill: #ffffff; /* Белый цвет иконки */
+}
