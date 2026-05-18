@@ -19,9 +19,10 @@ const items = [
     { name: "C.P. Company (белая)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_White.jpg" },
     { name: "C.P. Company (чёрная)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_Black.jpg" },
    { name: "Белые джинсы", size: "XL", price: "95", currency: "бун", category: "Джинсы", brand: "", img: "images/DjeansBagdan.jpg" },
-    { name: "MM6 Maison Margiela (чёрная)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "MM6", img: "images/Masion_Margela_Black.jpg" },
-    { name: "Футболка 'Цветущая сакура'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Artwear", img: "images/sakura.jpg" },
-    { name: "Джинсы Dime", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/Diime.jpg" }
+    { name: "MM6 Maison Margiela (чёрная)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "MM6", img: "images/MMBlack.jpg" },
+    { name: "Футболка 'Цветущая сакура'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Artwear", img: "images/Japan.jpg" },
+    { name: "Джинсы Dime", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/DimeBlack.jpg" },
+   { name: "Футболка 'RoleTheWorld'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Cortez", img: "images/RoleTheWorld.jpg" },
 ];
 
 function convertToRUB(priceBYN) {
