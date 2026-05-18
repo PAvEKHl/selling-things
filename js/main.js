@@ -4,6 +4,14 @@
 
 const BYN_TO_RUB = 26;
 
+// Инициализация Telegram WebApp
+const tg = window.Telegram.WebApp;
+
+// Если открыто внутри Telegram, добавляем класс для скрытия лишних блоков
+if (tg.initData) {
+    document.body.classList.add('telegram-view');
+}
+
 const items = [
     {
         name: "Футболка Dior",
@@ -20,7 +28,7 @@ const items = [
         price: "40",
         currency: "бун",
         category: "Футболки и майки",
-       brand: "",
+        brand: "",
         img: "images/hoodie grey.jpg"
     },
     {
@@ -95,7 +103,7 @@ const items = [
         brand: "Dime",
         img: "images/Diime.jpg"
     },
-   {
+    {
         name: "Джинсы Dime",
         size: "L",
         price: "85",
@@ -141,7 +149,7 @@ function loadProducts() {
                     <div class="price">${product.price} ${product.currency}</div>
                     <div class="price-hint">≈ ${priceInRub.toLocaleString()} ₽</div>
                 </div>
-                <button class="discuss-btn" data-name="${product.name}">
+                <button class="discuss-btn" data-name="${product.name}" data-price="${priceInRub.toLocaleString()}">
                     💬 Обсудить покупку
                 </button>
             </div>
@@ -155,7 +163,18 @@ function loadProducts() {
         const btn = card.querySelector('.discuss-btn');
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
-            discussPurchase(product.name);
+            
+            // Если открыто внутри Telegram, отправляем данные в бот
+            if (tg.initData) {
+                const orderData = {
+                    title: product.name,
+                    cost: priceInRub.toLocaleString() + " ₽"
+                };
+                tg.sendData(JSON.stringify(orderData));
+            } else {
+                // Если открыто в обычном браузере, работает старый переход
+                discussPurchase(product.name);
+            }
         });
         
         grid.appendChild(card);
