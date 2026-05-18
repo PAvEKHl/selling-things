@@ -21,7 +21,6 @@ const items = [
     { name: "MM6 Maison Margiela (чёрная)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "MM6", img: "images/Masion_Margela_Black.jpg" },
     { name: "Футболка 'Цветущая сакура'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Artwear", img: "images/sakura.jpg" },
     { name: "Джинсы Dime", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/Diime.jpg" },
-    { name: "Джинсы Dime", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/JeansDimeWhite.jpg" }
 ];
 
 function convertToRUB(priceBYN) {
