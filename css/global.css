@@ -375,33 +375,44 @@ footer {
 }
 
 /* =====================================================================
-   КНОПКА TELEGRAM В ЛЕВОМ НИЖНЕМ УГЛУ
+   ДИНАМИЧЕСКАЯ КНОПКА TELEGRAM (ВАРИАНТ 2: ПОКАЧИВАНИЕ)
    ===================================================================== */
 .tg-floating-button {
     position: fixed;
-    bottom: 25px;       /* Отступ от нижнего края экрана */
-    left: 25px;         /* Отступ от левого края экрана */
-    width: 60px;        /* Ширина кружка */
-    height: 60px;       /* Высота кружка */
-    background-color: #2481cc; /* Фирменный цвет Telegram */
-    border-radius: 50%; /* Делаем элемент круглым */
+    bottom: 25px;       
+    right: 25px;        /* Перенос на правую сторону */
+    width: 60px;        
+    height: 60px;       
+    background-color: #2481cc; 
+    border-radius: 50%; 
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); /* Тень для эффекта объема */
-    z-index: 1000;      /* Отображаем поверх всех элементов сайта */
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); 
+    z-index: 1000;      
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    
+    /* Подключение анимации покачивания */
+    animation: tg-wobble 3.5s infinite ease-in-out;
 }
 
-/* Эффект при наведении курсора */
 .tg-floating-button:hover {
-    transform: scale(1.1); /* Слегка увеличиваем кружок */
-    background-color: #1a6baf; /* Делаем цвет чуть темнее */
+    transform: scale(1.1) !important; /* !important нужен для перекрытия анимации */
+    background-color: #1a6baf;
 }
 
-/* Стили иконки внутри кружка */
 .tg-icon {
     width: 32px;
     height: 32px;
-    fill: #ffffff; /* Белый цвет иконки */
+    fill: #ffffff; 
+}
+
+/* Логика анимации покачивания (с паузой между циклами) */
+@keyframes tg-wobble {
+    0%, 100%, 20% { transform: rotate(0); }
+    25% { transform: rotate(15deg); }
+    30% { transform: rotate(-15deg); }
+    35% { transform: rotate(10deg); }
+    40% { transform: rotate(-10deg); }
+    45% { transform: rotate(0); }
 }
