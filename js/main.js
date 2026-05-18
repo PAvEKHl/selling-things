@@ -206,6 +206,31 @@ function openModal(product) {
     document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
     document.getElementById('modalRubHint').innerHTML = `≈ ${priceInRub.toLocaleString()} рублей`;
     
+    // Находим кнопку связи в модальном окне
+    const modalContactBtn = modal.querySelector('.modal-contact-btn');
+    if (modalContactBtn) {
+        // Очищаем старые обработчики клика, чтобы избежать дублирования
+        const newBtn = modalContactBtn.cloneNode(true);
+        modalContactBtn.parentNode.replaceChild(newBtn, modalContactBtn);
+        
+        // Настраиваем поведение кнопки в зависимости от среды выполнения
+        if (tg.initData) {
+            newBtn.innerText = "💬 Обсудить покупку в боте";
+            newBtn.href = "#"; // Отменяем переход по ссылке
+            newBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const orderData = {
+                    title: product.name,
+                    cost: priceInRub.toLocaleString() + " ₽"
+                };
+                tg.sendData(JSON.stringify(orderData));
+            });
+        } else {
+            newBtn.innerText = "📞 Связаться для покупки";
+            newBtn.href = "contacts.html#contacts";
+        }
+    }
+    
     modal.style.display = 'flex';
 }
 
