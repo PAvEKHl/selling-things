@@ -78,31 +78,26 @@ function loadProducts() {
             </div>
         `;
         
-        // НАДЕЖНЫЙ КЛИК ПО КНОПКЕ «ОБСУДИТЬ ПОКУПКУ»
+        // НАДЕЖНЫЙ КЛИК ПО КНОПКЕ «ОБСУДИТЬ ПОКУПКУ» НА КАРТОЧКЕ
         const btn = card.querySelector('.discuss-btn');
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            e.stopPropagation(); // Полностью изолируем клик по кнопке от карточки
+            e.stopPropagation(); 
             
             if (tg.initData) {
-                // Если мы в Telegram WebApp
+                // Если в Telegram WebApp
                 const orderData = { title: product.name, cost: formattedPrice };
                 tg.sendData(JSON.stringify(orderData));
             } else {
-                // Если мы в обычном браузере
+                // Если в обычном браузере — сохраняем и ПЕРЕНАПРАВЛЯЕМ на страницу контактов
                 saveSelectedProduct(product.name, formattedPrice);
-                const contactsSection = document.getElementById('contacts');
-                if (contactsSection) {
-                    contactsSection.scrollIntoView({ behavior: 'smooth' });
-                }
+                window.location.href = "contacts.html#contacts";
             }
         });
 
         // КЛИК ПО САМОЙ КАРТОЧКЕ (ОТКРЫТИЕ МОДАЛКИ)
         card.addEventListener('click', (e) => {
-            // Если кликнули на кнопку обсуждения или её внутренности — модалку НЕ открываем
             if (e.target.closest('.discuss-btn')) return;
-            
             openModal(product);
         });
         
@@ -139,15 +134,13 @@ function openModal(product) {
     document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
     document.getElementById('modalRubHint').innerHTML = `≈ ${formattedPrice} рублей`;
     
-    // Ищем кнопку внутри модалки. И по старому классу, и по общему классу кнопок, чтобы точно найти!
     let modalContactBtn = modal.querySelector('.modal-contact-btn') || modal.querySelector('.discuss-btn');
     
     if (modalContactBtn) {
-        // Пересоздаем кнопку, чтобы стереть старые заглушки
+        // Очищаем старые обработчики клика
         const newBtn = modalContactBtn.cloneNode(true);
         modalContactBtn.parentNode.replaceChild(newBtn, modalContactBtn);
         
-        // Формируем текст сообщения для прямой ссылки
         const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.name}\n📝 Цена: ${formattedPrice}`;
         const encodedText = encodeURIComponent(messageText);
         
@@ -157,31 +150,21 @@ function openModal(product) {
             newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
-                
                 try {
-                    // Попытка №1: Отправить данные через WebApp
                     const orderData = { title: product.name, cost: formattedPrice };
                     tg.sendData(JSON.stringify(orderData));
                 } catch (error) {
-                    // Попытка №2: Если Telegram заблокировал sendData, шлем в личку Павла
-                    console.log("tg.sendData не поддерживается, перенаправляем в личку");
+                    // Аварийный переход в ТГ Павла, если sendData недоступен
                     window.location.href = `https://t.me/PavelHlebko?text=${encodedText}`;
                 }
             });
         } else {
-            // Если открыли в обычном браузере
+            // В обычном браузере кнопка модалки просто редиректит на контакты
             newBtn.innerText = "📞 Связаться для покупки";
-            newBtn.href = "#contacts";
-            newBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
+            newBtn.href = "contacts.html#contacts";
+            newBtn.addEventListener('click', () => {
                 saveSelectedProduct(product.name, formattedPrice);
                 modal.style.display = 'none';
-                
-                const contactsSection = document.getElementById('contacts');
-                if (contactsSection) {
-                    contactsSection.scrollIntoView({ behavior: 'smooth' });
-                }
             });
         }
     }
@@ -269,7 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initFilters();
     showStats();
     
-    // Специфический аккордеон для FAQ
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
