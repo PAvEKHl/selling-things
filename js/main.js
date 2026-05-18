@@ -222,16 +222,23 @@ function openModal(product) {
     document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
     document.getElementById('modalRubHint').innerHTML = `≈ ${formattedPrice} рублей`;
     
+    // Находим контейнер, где лежит кнопка/кнопки связи в модальном окне
     const modalContactBtn = modal.querySelector('.modal-contact-btn');
+    
     if (modalContactBtn) {
-        // Пересоздаем кнопку, чтобы очистить старые слушатели кликов
-        const newBtn = modalContactBtn.cloneNode(true);
-        modalContactBtn.parentNode.replaceChild(newBtn, modalContactBtn);
-        
+        // Формируем текст сообщения для Telegram лички
+        const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.name}\n📝 Цена: ${formattedPrice}`;
+        const encodedText = encodeURIComponent(messageText);
+
         if (tg.initData) {
-            newBtn.innerText = "💬 Обсудить покупку в боте";
-            newBtn.href = "#";
-            newBtn.addEventListener('click', (e) => {
+            // ЕСЛИ ВНУТРИ ТЕЛЕГРАМА: Оставляем одну кнопку отправки данных в бот
+            modalContactBtn.outerHTML = `
+                <button class="modal-contact-btn custom-modal-btn default-btn" style="width: 100%;">
+                    💬 Обсудить покупку в боте
+                </button>
+            `;
+            
+            modal.querySelector('.modal-contact-btn').addEventListener('click', (e) => {
                 e.preventDefault();
                 const orderData = {
                     title: product.name,
@@ -240,16 +247,37 @@ function openModal(product) {
                 tg.sendData(JSON.stringify(orderData));
             });
         } else {
-            newBtn.innerText = "📞 Связаться для покупки";
-            newBtn.href = "contacts.html#contacts";
-            // При клике в модальном окне обычного браузера тоже запоминаем вещь перед переходом
-            newBtn.addEventListener('click', () => {
-                const productData = {
-                    title: product.name,
-                    description: `Цена: ${formattedPrice}`
-                };
-                localStorage.setItem('selectedProduct', JSON.stringify(productData));
-            });
+            // ЕСЛИ В ОБЫЧНОМ БРАУЗЕРЕ: Выводим полноценный выбор менеджера со всеми ссылками и телефонами!
+            // Используем твои родные CSS-классы, чтобы дизайн идеально вписался в стили сайта
+            modalContactBtn.outerHTML = `
+                <div class="modal-managers-block" style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px; width: 100%;">
+                    
+                    <div class="modal-manager-card" style="border-top: 1px solid rgba(255,0,255,0.2); padding-top: 10px;">
+                        <h4 style="margin-bottom: 8px; color: #fff; font-size: 0.95rem; text-align: left;">👨‍💼 Написать или позвонить Даниилу:</h4>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://t.me/Kamelot709?text=${encodedText}" class="contact-btn telegram" target="_blank" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem;">
+                                📱 @Kamelot709
+                            </a>
+                            <a href="tel:+375296293264" class="contact-btn phone" target="_blank" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem;">
+                                📞 +375 29 629 32 64
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="modal-manager-card" style="border-top: 1px solid rgba(255,0,255,0.2); padding-top: 10px;">
+                        <h4 style="margin-bottom: 8px; color: #fff; font-size: 0.95rem; text-align: left;">👨‍💻 Написать или позвонить Павлу:</h4>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <a href="https://t.me/PavelHlebko?text=${encodedText}" class="contact-btn telegram" target="_blank" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem;">
+                                📱 @PavelHlebko
+                            </a>
+                            <a href="tel:+375336621641" class="contact-btn phone" target="_blank" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem;">
+                                📞 +375 33 662 16 41
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            `;
         }
     }
     
