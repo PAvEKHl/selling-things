@@ -393,7 +393,7 @@ footer {
     transition: transform 0.3s ease, background-color 0.3s ease;
     
     /* Подключение анимации покачивания */
-    animation: tg-wobble 2.5s infinite ease-in-out;
+    animation: tg-wobble 1.5s infinite ease-in-out;
 }
 
 .tg-floating-button:hover {
