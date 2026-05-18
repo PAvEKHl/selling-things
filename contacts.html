@@ -26,7 +26,6 @@
         </ul>
     </nav>
 
-    <!-- Hero секция -->
     <header class="hero">
         <div class="hero-content">
             <h1>PHONEX</h1>
@@ -34,7 +33,6 @@
         </div>
     </header>
 
-    <!-- О нас -->
     <section class="about-section">
         <div class="container">
             <div class="about-grid">
@@ -47,7 +45,7 @@
                     <strong>Качество:</strong> Лично гарантируем долговечность каждой модели.<br>
                     <strong>Доступность:</strong> Убираем цепочку посредников, чтобы вы платили только за саму вещь.</p>
                     
-                    <h3>Почему выбирают нас?</h3>
+                    <h3>Why choose us?</h3>
                     <ul class="advantages-list">
                         <li>Многоэтапный контроль качества. Мы лично отбираем вещи и проверяем каждую партию на наличие брака перед отправкой. Вы получаете только то, что носили бы мы сами.</li>
                         <li>Цены без лишних наценок. Работаем напрямую с проверенными фабриками и поставщиками Китая, минуя посредников. Это позволяет нам сохранять стоимость на 30-50% ниже рыночной.</li>
@@ -57,15 +55,10 @@
                         <li>Налаженная логистика. Мы берем на себя все сложности таможни и доставки. Вам остается только забрать свой заказ в кратчайшие сроки удобным для вас способом.</li>
                     </ul>
                 </div>
-                <!-- Картинка временно закомментирована -->
-                <!-- <div class="about-image">
-                    <img src="images/phoenix.jpg" alt="PHOENIX">
-                </div> -->
             </div>
         </div>
     </section>
 
-    <!-- Доставка -->
     <section class="delivery-section">
         <div class="container">
             <div class="section-title">
@@ -97,7 +90,6 @@
         </div>
     </section>
 
-    <!-- Контакты (исправленный блок) -->
     <section id="contacts" class="contacts-section">
         <div class="container">
             <div class="section-title">
@@ -107,7 +99,6 @@
             </div>
 
             <div class="contacts-grid">
-                <!-- Карточка Павла -->
                 <div class="contact-card">
                     <div class="contact-icon">👨‍💻</div>
                     <h3>Павел</h3>
@@ -122,7 +113,6 @@
                     <div class="operator-badge">МТС</div>
                 </div>
 
-                <!-- Карточка Даниила -->
                 <div class="contact-card">
                     <div class="contact-icon">👨‍💼</div>
                     <h3>Даниил</h3>
@@ -144,7 +134,6 @@
         </div>
     </section>
 
-    <!-- СОЦИАЛЬНЫЕ СЕТИ -->
     <section class="social-section">
         <div class="container">
             <div class="section-title">
@@ -193,7 +182,6 @@
         </div>
     </section>
 
-    <!-- FAQ -->
     <section class="faq-section">
         <div class="container">
             <div class="section-title">
@@ -238,7 +226,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -265,43 +252,35 @@
             });
         });
 
-        // Проверяем, был ли выбран товар с главной страницы
+        // Исправленный парсинг localStorage (убран [object Object])
         document.addEventListener('DOMContentLoaded', () => {
-            const selectedProduct = localStorage.getItem('selectedProduct');
-            if (selectedProduct) {
-                const infoMessage = document.querySelector('.info-message');
-                if (infoMessage) {
-                    const notice = document.createElement('div');
-                    notice.style.cssText = `
-                        background: rgba(255,0,255,0.15);
-                        border-left: 4px solid #ff00ff;
-                        padding: 15px;
-                        margin-bottom: 20px;
-                        border-radius: 12px;
-                        color: #fff;
-                        text-shadow: 0 0 5px rgba(255,0,255,0.5);
-                    `;
-                    notice.innerHTML = `✨ Вы выбрали товар: <strong style="color: #ff00ff;">${selectedProduct}</strong><br>Свяжитесь с нами удобным для вас способом, чтобы обсудить детали покупки!`;
-                    infoMessage.parentNode.insertBefore(notice, infoMessage);
+            const savedProduct = localStorage.getItem('selectedProduct');
+            if (savedProduct) {
+                try {
+                    const product = JSON.parse(savedProduct);
+                    const infoMessage = document.querySelector('.info-message');
+                    if (infoMessage && product.title) {
+                        const notice = document.createElement('div');
+                        notice.style.cssText = `
+                            background: rgba(255, 0, 255, 0.15);
+                            border-left: 4px solid #ff00ff;
+                            padding: 15px;
+                            margin-bottom: 20px;
+                            border-radius: 12px;
+                            color: #fff;
+                            text-shadow: 0 0 5px rgba(255, 0, 255, 0.5);
+                            font-family: 'Montserrat', sans-serif;
+                        `;
+                        notice.innerHTML = `✨ Вы выбрали товар: <strong style="color: #ff00ff;">${product.title}</strong> (${product.description})<br>Свяжитесь с нами удобным для вас способом, чтобы обсудить детали покупки!`;
+                        infoMessage.parentNode.insertBefore(notice, infoMessage);
+                    }
+                } catch (e) {
+                    console.error("Ошибка отображения выбранного товара:", e);
                 }
+                // Очищаем, чтобы плашка исчезала при простой перезагрузке страницы
                 localStorage.removeItem('selectedProduct');
             }
         });
     </script>
-
-    <!-- Плавающая кнопка Telegram-бота (опционально) -->
-    <!-- Если не нужна, удалите этот блок. Если нужна – добавьте стили в contacts.css -->
-    <!--
-    <a href="https://t.me/PhoenixClothesbot" class="tg-floating-button" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" class="tg-icon">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-        </svg>
-    </a>
-    -->
-        <a href="https://t.me/PhoenixClothesbot" class="tg-floating-button" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" class="tg-icon">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
-        </svg>
-    </a>
 </body>
 </html>
