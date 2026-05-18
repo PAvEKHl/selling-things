@@ -1,6 +1,6 @@
-/* ========================================
-   MAIN PAGE SPECIFIC - только для главной страницы
-   ======================================== */
+/* ==========================================================================
+   MAIN PAGE SPECIFIC & CONTACTS LOGIC — PHOENIX WEAR
+   ========================================================================== */
 
 const BYN_TO_RUB = 26;
 
@@ -12,6 +12,7 @@ if (tg.initData) {
     document.body.classList.add('telegram-view');
 }
 
+// Массив товаров каталога
 const items = [
     {
         name: "Футболка Dior",
@@ -114,16 +115,23 @@ const items = [
     },
 ];
 
+// Конвертер валюты
 function convertToRUB(priceBYN) {
     const priceNum = parseInt(priceBYN);
     return Math.round(priceNum * BYN_TO_RUB);
 }
 
-function discussPurchase(productName) {
-    localStorage.setItem('selectedProduct', productName);
+// Функция перехода на страницу контактов со строгим сохранением структуры JSON-объекта
+function discussPurchase(productName, productPrice) {
+    const productData = {
+        title: productName,
+        description: `Цена: ${productPrice}`
+    };
+    localStorage.setItem('selectedProduct', JSON.stringify(productData));
     window.location.href = 'contacts.html#contacts';
 }
 
+// Генерация карточек товаров на главной странице
 function loadProducts() {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
@@ -132,6 +140,8 @@ function loadProducts() {
     
     items.forEach((product, index) => {
         const priceInRub = convertToRUB(product.price);
+        const formattedPrice = priceInRub.toLocaleString() + " ₽";
+        
         const card = document.createElement('div');
         card.className = 'product-card';
         card.setAttribute('data-index', index);
@@ -147,39 +157,42 @@ function loadProducts() {
                 <div class="size-info">📏 Размер: ${product.size}</div>
                 <div class="price-wrapper">
                     <div class="price">${product.price} ${product.currency}</div>
-                    <div class="price-hint">≈ ${priceInRub.toLocaleString()} ₽</div>
+                    <div class="price-hint">≈ ${formattedPrice}</div>
                 </div>
-                <button class="discuss-btn" data-name="${product.name}" data-price="${priceInRub.toLocaleString()}">
+                <button class="discuss-btn" data-name="${product.name}" data-price="${formattedPrice}">
                     💬 Обсудить покупку
                 </button>
             </div>
         `;
         
+        // Клик по самой карточке открывает модалку
         card.addEventListener('click', (e) => {
             if (e.target.classList.contains('discuss-btn')) return;
             openModal(product);
         });
         
+        // Клик по кнопке «Обсудить покупку»
         const btn = card.querySelector('.discuss-btn');
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             
-            // Если открыто внутри Telegram, отправляем данные в бот
             if (tg.initData) {
+                // Если внутри Telegram WebApp — шлем данные боту
                 const orderData = {
                     title: product.name,
-                    cost: priceInRub.toLocaleString() + " ₽"
+                    cost: formattedPrice
                 };
                 tg.sendData(JSON.stringify(orderData));
             } else {
-                // Если открыто в обычном браузере, работает старый переход
-                discussPurchase(product.name);
+                // Если в обычном браузере — сохраняем инфу и редиректим
+                discussPurchase(product.name, formattedPrice);
             }
         });
         
         grid.appendChild(card);
     });
     
+    // Анимация плавного появления карточек при скролле (IntersectionObserver)
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -192,42 +205,51 @@ function loadProducts() {
     document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 }
 
+// Работа с модальным окном
 const modal = document.getElementById('productModal');
 
 function openModal(product) {
     if (!modal) return;
     
     const priceInRub = convertToRUB(product.price);
+    const formattedPrice = priceInRub.toLocaleString() + " ₽";
+    
     document.getElementById('modalImg').src = product.img;
     document.getElementById('modalName').innerText = product.name;
     document.getElementById('modalCategory').innerHTML = `<span class="modal-category">${product.category}</span>`;
     document.getElementById('modalBrand').innerHTML = `<span class="modal-brand">🏷️ ${product.brand || ''}</span>`;
     document.getElementById('modalSize').innerHTML = `<span class="modal-size">📏 Размер: ${product.size}</span>`;
     document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
-    document.getElementById('modalRubHint').innerHTML = `≈ ${priceInRub.toLocaleString()} рублей`;
+    document.getElementById('modalRubHint').innerHTML = `≈ ${formattedPrice} рублей`;
     
-    // Находим кнопку связи в модальном окне
     const modalContactBtn = modal.querySelector('.modal-contact-btn');
     if (modalContactBtn) {
-        // Очищаем старые обработчики клика, чтобы избежать дублирования
+        // Пересоздаем кнопку, чтобы очистить старые слушатели кликов
         const newBtn = modalContactBtn.cloneNode(true);
         modalContactBtn.parentNode.replaceChild(newBtn, modalContactBtn);
         
-        // Настраиваем поведение кнопки в зависимости от среды выполнения
         if (tg.initData) {
             newBtn.innerText = "💬 Обсудить покупку в боте";
-            newBtn.href = "#"; // Отменяем переход по ссылке
+            newBtn.href = "#";
             newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const orderData = {
                     title: product.name,
-                    cost: priceInRub.toLocaleString() + " ₽"
+                    cost: formattedPrice
                 };
                 tg.sendData(JSON.stringify(orderData));
             });
         } else {
             newBtn.innerText = "📞 Связаться для покупки";
             newBtn.href = "contacts.html#contacts";
+            // При клике в модальном окне обычного браузера тоже запоминаем вещь перед переходом
+            newBtn.addEventListener('click', () => {
+                const productData = {
+                    title: product.name,
+                    description: `Цена: ${formattedPrice}`
+                };
+                localStorage.setItem('selectedProduct', JSON.stringify(productData));
+            });
         }
     }
     
@@ -237,15 +259,19 @@ function openModal(product) {
 function initModal() {
     if (!modal) return;
     
-    document.querySelector('.close-modal').addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
+    const closeBtn = document.querySelector('.close-modal');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    }
     
     window.addEventListener('click', (e) => {
         if (e.target === modal) modal.style.display = 'none';
     });
 }
 
+// Фильтрация товаров каталога
 function initFilters() {
     if (document.querySelector('.filter-bar')) return;
     
@@ -286,6 +312,7 @@ function initFilters() {
     });
 }
 
+// Статистика магазина в Hero-блок
 function showStats() {
     if (document.querySelector('.stats-bar')) return;
     
@@ -315,23 +342,55 @@ function showStats() {
     }
 }
 
+// БЕЗОПАСНОЕ ДИНАМИЧЕСКОЕ ОБНОВЛЕНИЕ ССЫЛОК TELEGRAM (Для contacts.html)
+// Ищет элементы по классам стилей, не нарушая верстку и селекторы CSS
+function updateContactLinks() {
+    const telegramButtons = document.querySelectorAll('.contact-btn.telegram');
+    const savedProduct = localStorage.getItem('selectedProduct');
+    
+    if (savedProduct && telegramButtons.length > 0) {
+        try {
+            const product = JSON.parse(savedProduct);
+            const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.title}\n📝 ${product.description}`;
+            const encodedText = encodeURIComponent(messageText);
+            
+            telegramButtons.forEach(btn => {
+                const currentHref = btn.getAttribute('href');
+                
+                // Проверяем изначальный href, чтобы понять, чья это кнопка, и не перепутать лички
+                if (currentHref && currentHref.includes('Kamelot709')) {
+                    btn.href = `https://t.me/Kamelot709?text=${encodedText}`;
+                } else if (currentHref && currentHref.includes('PavelHlebko')) {
+                    btn.href = `https://t.me/PavelHlebko?text=${encodedText}`;
+                }
+            });
+        } catch (e) {
+            console.error("Ошибка парсинга данных о выбранном товаре из localStorage:", e);
+        }
+    }
+}
+
+// Главный инициализатор скриптов при полной сборке DOM дерева
 document.addEventListener('DOMContentLoaded', () => {
+    // Инициализация элементов главной страницы (если они присутствуют в DOM)
     loadProducts();
     initModal();
     initFilters();
     showStats();
-    console.log('✅ Главная страница загружена');
-});
-// Функция для сохранения выбранного товара в память браузера
-function saveSelectedProduct(title, description) {
-    const productData = {
-        title: title,
-        description: description
-    };
-    localStorage.setItem('selectedProduct', JSON.stringify(productData));
     
-    // Сразу обновляем ссылки, если кнопки находятся на этой же странице
+    // Попытка обновления контактов (сработает на странице contacts.html)
     updateContactLinks();
-}
+    
+    // Инициализация выпадающих списков FAQ (чтобы они корректно работали)
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        if (question) {
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        }
+    });
 
-
+    console.log('✅ Инициализация скриптов магазина Phoenix Wear успешно завершена.');
+});
