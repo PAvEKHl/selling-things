@@ -121,14 +121,16 @@ function convertToRUB(priceBYN) {
     return Math.round(priceNum * BYN_TO_RUB);
 }
 
-// Функция перехода на страницу контактов со строгим сохранением структуры JSON-объекта
-function discussPurchase(productName, productPrice) {
+// Запоминание выбранного товара и динамическое обновление ссылок
+function saveSelectedProduct(productName, productPrice) {
     const productData = {
         title: productName,
         description: `Цена: ${productPrice}`
     };
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
-    window.location.href = 'contacts.html#contacts';
+    
+    // Сразу же пересчитываем ссылки в секции контактов
+    updateContactLinks();
 }
 
 // Генерация карточек товаров на главной странице
@@ -171,21 +173,26 @@ function loadProducts() {
             openModal(product);
         });
         
-        // Клик по кнопке «Обсудить покупку»
+        // Клик по кнопке «Обсудить покупку» на карточке
         const btn = card.querySelector('.discuss-btn');
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             
             if (tg.initData) {
-                // Если внутри Telegram WebApp — шлем данные боту
                 const orderData = {
                     title: product.name,
                     cost: formattedPrice
                 };
                 tg.sendData(JSON.stringify(orderData));
             } else {
-                // Если в обычном браузере — сохраняем инфу и редиректим
-                discussPurchase(product.name, formattedPrice);
+                // Сохраняем товар в память и скроллим к блоку контактов
+                saveSelectedProduct(product.name, formattedPrice);
+                const contactsSection = document.getElementById('contacts');
+                if (contactsSection) {
+                    contactsSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    window.location.href = 'contacts.html#contacts';
+                }
             }
         });
         
@@ -222,23 +229,16 @@ function openModal(product) {
     document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
     document.getElementById('modalRubHint').innerHTML = `≈ ${formattedPrice} рублей`;
     
-    // Находим контейнер, где лежит кнопка/кнопки связи в модальном окне
     const modalContactBtn = modal.querySelector('.modal-contact-btn');
-    
     if (modalContactBtn) {
-        // Формируем текст сообщения для Telegram лички
-        const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.name}\n📝 Цена: ${formattedPrice}`;
-        const encodedText = encodeURIComponent(messageText);
-
+        // Пересоздаем кнопку для очистки старых слушателей событий
+        const newBtn = modalContactBtn.cloneNode(true);
+        modalContactBtn.parentNode.replaceChild(newBtn, modalContactBtn);
+        
         if (tg.initData) {
-            // ЕСЛИ ВНУТРИ ТЕЛЕГРАМА: Оставляем одну кнопку отправки данных в бот
-            modalContactBtn.outerHTML = `
-                <button class="modal-contact-btn custom-modal-btn default-btn" style="width: 100%;">
-                    💬 Обсудить покупку в боте
-                </button>
-            `;
-            
-            modal.querySelector('.modal-contact-btn').addEventListener('click', (e) => {
+            newBtn.innerText = "💬 Обсудить покупку в боте";
+            newBtn.href = "#";
+            newBtn.addEventListener('click', (e) => {
                 e.preventDefault();
                 const orderData = {
                     title: product.name,
@@ -247,37 +247,21 @@ function openModal(product) {
                 tg.sendData(JSON.stringify(orderData));
             });
         } else {
-            // ЕСЛИ В ОБЫЧНОМ БРАУЗЕРЕ: Выводим полноценный выбор менеджера со всеми ссылками и телефонами!
-            // Используем твои родные CSS-классы, чтобы дизайн идеально вписался в стили сайта
-            modalContactBtn.outerHTML = `
-                <div class="modal-managers-block" style="margin-top: 20px; display: flex; flex-direction: column; gap: 15px; width: 100%;">
-                    
-                    <div class="modal-manager-card" style="border-top: 1px solid rgba(255,0,255,0.2); padding-top: 10px;">
-                        <h4 style="margin-bottom: 8px; color: #fff; font-size: 0.95rem; text-align: left;">👨‍💼 Написать или позвонить Даниилу:</h4>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <a href="https://t.me/Kamelot709?text=${encodedText}" class="contact-btn telegram" target="_blank" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem;">
-                                📱 @Kamelot709
-                            </a>
-                            <a href="tel:+375296293264" class="contact-btn phone" target="_blank" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem;">
-                                📞 +375 29 629 32 64
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="modal-manager-card" style="border-top: 1px solid rgba(255,0,255,0.2); padding-top: 10px;">
-                        <h4 style="margin-bottom: 8px; color: #fff; font-size: 0.95rem; text-align: left;">👨‍💻 Написать или позвонить Павлу:</h4>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <a href="https://t.me/PavelHlebko?text=${encodedText}" class="contact-btn telegram" target="_blank" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem;">
-                                📱 @PavelHlebko
-                            </a>
-                            <a href="tel:+375336621641" class="contact-btn phone" target="_blank" style="flex: 1; min-width: 140px; padding: 8px 12px; font-size: 0.8rem;">
-                                📞 +375 33 662 16 41
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
-            `;
+            newBtn.innerText = "📞 Связаться для покупки";
+            newBtn.href = "#contacts";
+            newBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Сохраняем вещь из модалки и плавно переходим к блоку контактов
+                saveSelectedProduct(product.name, formattedPrice);
+                modal.style.display = 'none';
+                
+                const contactsSection = document.getElementById('contacts');
+                if (contactsSection) {
+                    contactsSection.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    window.location.href = 'contacts.html#contacts';
+                }
+            });
         }
     }
     
@@ -370,8 +354,8 @@ function showStats() {
     }
 }
 
-// БЕЗОПАСНОЕ ДИНАМИЧЕСКОЕ ОБНОВЛЕНИЕ ССЫЛОК TELEGRAM (Для contacts.html)
-// Ищет элементы по классам стилей, не нарушая верстку и селекторы CSS
+// ДИНАМИЧЕСКОЕ ОБНОВЛЕНИЕ ТЕКСТА ДЛЯ ВЕРСТКИ КОНТАКТОВ
+// Ищет ссылки внутри твоей оригинальной разметки <section id="contacts">
 function updateContactLinks() {
     const telegramButtons = document.querySelectorAll('.contact-btn.telegram');
     const savedProduct = localStorage.getItem('selectedProduct');
@@ -385,7 +369,7 @@ function updateContactLinks() {
             telegramButtons.forEach(btn => {
                 const currentHref = btn.getAttribute('href');
                 
-                // Проверяем изначальный href, чтобы понять, чья это кнопка, и не перепутать лички
+                // Проверяем по юзернейму, чья именно это ссылка, чтобы не перепутать менеджеров
                 if (currentHref && currentHref.includes('Kamelot709')) {
                     btn.href = `https://t.me/Kamelot709?text=${encodedText}`;
                 } else if (currentHref && currentHref.includes('PavelHlebko')) {
@@ -393,23 +377,22 @@ function updateContactLinks() {
                 }
             });
         } catch (e) {
-            console.error("Ошибка парсинга данных о выбранном товаре из localStorage:", e);
+            console.error("Ошибка парсинга localStorage:", e);
         }
     }
 }
 
-// Главный инициализатор скриптов при полной сборке DOM дерева
+// Главный инициализатор скриптов страницы
 document.addEventListener('DOMContentLoaded', () => {
-    // Инициализация элементов главной страницы (если они присутствуют в DOM)
     loadProducts();
     initModal();
     initFilters();
     showStats();
     
-    // Попытка обновления контактов (сработает на странице contacts.html)
+    // Пересчитываем ссылки в готовой секции контактов, если товар уже был выбран ранее
     updateContactLinks();
     
-    // Инициализация выпадающих списков FAQ (чтобы они корректно работали)
+    // Инициализация FAQ
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const question = item.querySelector('.faq-question');
@@ -420,5 +403,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    console.log('✅ Инициализация скриптов магазина Phoenix Wear успешно завершена.');
+    console.log('✅ Полная инициализация Phoenix Wear завершена.');
 });
