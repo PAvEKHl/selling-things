@@ -1,6 +1,6 @@
-/* ========================================
+/* ==========================================================================
    GLOBAL FUNCTIONS - для всего сайта
-   ======================================== */
+   ========================================================================== */
 
 // Глобальное состояние корзины
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -50,6 +50,7 @@ function initBurgerMenu() {
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                burger.classList.remove('active'); // Сбрасываем иконку бургера
             });
         });
     }
@@ -59,18 +60,17 @@ function initBurgerMenu() {
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            if (href === '#') return;
+            
+            const target = document.querySelector(href);
             if (target) {
+                e.preventDefault();
                 target.scrollIntoView({ behavior: 'smooth' });
             }
         });
     });
 }
-
-// ❌ ФУНКЦИЯ ИЗМЕНЕНИЯ НАВБАРА - ПОЛНОСТЬЮ УДАЛЕНА ❌
-// Навбар теперь всегда остаётся тёмным, как задано в CSS
-// (предыдущая функция, которая меняла цвет, удалена)
 
 // Инициализация корзины
 function initCartButton() {
@@ -105,12 +105,41 @@ function initSearchButton() {
     }
 }
 
-// Глобальная инициализация
+// ДИНАМИЧЕСКОЕ ОБНОВЛЕНИЕ ССЫЛОК TELEGRAM (Для секции #contacts)
+function updateContactLinks() {
+    const telegramButtons = document.querySelectorAll('.contact-btn.telegram');
+    const savedProduct = localStorage.getItem('selectedProduct');
+    
+    if (savedProduct && telegramButtons.length > 0) {
+        try {
+            const product = JSON.parse(savedProduct);
+            const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.title}\n📝 ${product.description}`;
+            const encodedText = encodeURIComponent(messageText);
+            
+            telegramButtons.forEach(btn => {
+                const currentHref = btn.getAttribute('href');
+                
+                // Проверяем изначальный href, чтобы не перепутать лички Даниила и Павла
+                if (currentHref && currentHref.includes('Kamelot709')) {
+                    btn.href = `https://t.me/Kamelot709?text=${encodedText}`;
+                } else if (currentHref && currentHref.includes('PavelHlebko')) {
+                    btn.href = `https://t.me/PavelHlebko?text=${encodedText}`;
+                }
+            });
+        } catch (e) {
+            console.error("Ошибка чтения localStorage:", e);
+        }
+    }
+}
+
+// Глобальная инициализация при загрузке DOM
 document.addEventListener('DOMContentLoaded', () => {
     initBurgerMenu();
     initSmoothScroll();
-    // initNavbarScrollEffect();  ← ЭТА СТРОКА УДАЛЕНА! Функция больше не вызывается
     initCartButton();
     initSearchButton();
     updateCartCounter();
+    
+    // Сразу обновляем контакты на основе того, что было выбрано ранее
+    updateContactLinks();
 });
