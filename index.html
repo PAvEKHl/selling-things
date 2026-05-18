@@ -2,21 +2,19 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>卩卄ㄖ乇几丨乂 WEAR | Магазин одежды</title>
     
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Global Styles -->
     <link rel="stylesheet" href="css/global.css">
     
-    <!-- Page Specific Styles -->
     <link rel="stylesheet" href="css/main.css">
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="logo">卩卄ㄖ乇几丨乂<span>WEAR</span></div>
         <div class="burger" id="burger">
@@ -30,10 +28,8 @@
             <li><a href="contacts.html">О нас</a></li>
             <li><a href="contacts.html#contacts">Контакты</a></li>
         </ul>
-        <!-- Иконки поиска и корзины временно закомментированы -->
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
         <div class="hero-content">
             <h1>Новая коллекция 2026</h1>
@@ -42,7 +38,6 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main id="catalog">
         <div class="section-title" id="catalogTitle">
             <h2>Наши товары</h2>
@@ -51,7 +46,6 @@
         <div id="catalog-grid" class="catalog-grid"></div>
     </main>
 
-    <!-- Modal Window -->
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
@@ -66,7 +60,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -83,34 +76,25 @@
         <p class="copyright">&copy; 2026 Все права защищены</p>
     </footer>
 
-    <!-- Global JS -->
     <script src="js/global.js"></script>
     
-    <!-- Page Specific JS -->
     <script src="js/main.js"></script>
     
-    <!-- Дополнительный скрипт для коррекции скролла -->
     <script>
-        // Функция для скролла к заголовку с учетом высоты навбара
         function scrollToCatalogTitle() {
             const catalogTitle = document.getElementById('catalogTitle');
             const navbar = document.querySelector('.navbar');
             
             if (catalogTitle) {
-                // Получаем позицию элемента
                 const titlePosition = catalogTitle.getBoundingClientRect().top + window.pageYOffset;
-                // Получаем высоту навбара
                 const navbarHeight = navbar ? navbar.offsetHeight : 80;
-                // Вычитаем высоту навбара, чтобы заголовок был виден полностью
                 const offsetPosition = titlePosition - navbarHeight - 10;
                 
-                // Плавный скролл
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
                 
-                // Добавляем визуальный эффект
                 catalogTitle.classList.add('highlight-title');
                 setTimeout(() => {
                     catalogTitle.classList.remove('highlight-title');
@@ -118,9 +102,7 @@
             }
         }
         
-        // Обработчик для всех ссылок на каталог
         document.addEventListener('DOMContentLoaded', () => {
-            // Находим все ссылки, ведущие к #catalog
             const catalogLinks = document.querySelectorAll('a[href="#catalog"]');
             
             catalogLinks.forEach(link => {
@@ -130,13 +112,29 @@
                 });
             });
             
-            // Если в URL есть якорь #catalog, скроллим к заголовку
             if (window.location.hash === '#catalog') {
                 setTimeout(() => {
                     scrollToCatalogTitle();
                 }, 300);
             }
         });
+    </script>
+
+    <script>
+        // Инициализация интерфейса WebApp
+        const tg = window.Telegram.WebApp;
+        
+        // Принудительное раскрытие шторки на весь экран смартфона
+        tg.expand();
+
+        // Функция отправки данных (если решишь передавать заказ в чат бота)
+        function sendOrderData(productName, price) {
+            const orderInfo = {
+                title: productName,
+                cost: price
+            };
+            tg.sendData(JSON.stringify(orderInfo));
+        }
     </script>
 </body>
 </html>
