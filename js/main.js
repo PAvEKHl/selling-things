@@ -17,7 +17,7 @@ const items = [
    { name: "Футболка 'RoleTheWorld'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Cortez", img: "images/RoleTheWorld.jpg" },
     { name: "Футболка Dior", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Dior", img: "images/Dior.jpg" },
     { name: "худи с сердцем(серое)", size: "L", price: "90", currency: "бун", category: "Футболки и майки", brand: "", img: "images/hoodie grey.jpg" },
-    { name: "Кроссовки Lanvin", size: "42", price: "175", currency: "бун", category: "Кроссовки", brand: "Lanvin", img: "images/Lanvin.jpg" },
+    { name: "Кроссовки Lanvin", size: "42", price: "170", currency: "бун", category: "Кроссовки", brand: "Lanvin", img: "images/Lanvin.jpg" },
     { name: "C.P. Company (белая)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_White.jpg" },
     { name: "C.P. Company (чёрная)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_Black.jpg" },
    { name: "Белые джинсы", size: "XL", price: "95", currency: "бун", category: "Джинсы", brand: "", img: "images/DjeansBagdan.jpg" },
