@@ -13,7 +13,6 @@ if (tg.initData) {
 
 // Массив товаров
 const items = [
-   { name: "Джинсы Dime(синие)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "" },
     { name: "Джинсы Dime(чёрные)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/DimebkackStreet.jpg" },
    { name: "Футболка 'RoleTheWorld'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Cortez", img: "images/RoleTheWorld.jpg" },
     { name: "худи с сердцем(серое)", size: "L", price: "90", currency: "бун", category: "Футболки и майки", brand: "", img: "images/hoodie grey.jpg" },
@@ -23,6 +22,7 @@ const items = [
    { name: "Белые джинсы", size: "XL", price: "95", currency: "бун", category: "Джинсы", brand: "", img: "images/DjeansBagdan.jpg" },
     { name: "MM6 Maison Margiela (чёрная)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "MM6", img: "images/MMBlack.jpg" },
     { name: "Футболка 'Цветущая сакура'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Artwear", img: "images/Japan.jpg" },
+    { name: "Джинсы Dime(синие)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "" },
 ];
 
 function convertToRUB(priceBYN) {
