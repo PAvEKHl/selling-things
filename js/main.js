@@ -13,7 +13,7 @@ if (tg.initData) {
 
 // Массив товаров
 const items = [
-    { name: "Джинсы Dime(чёрные)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/DimebkackStreet.jpg" },
+    //{ name: "Джинсы Dime(чёрные)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/DimebkackStreet.jpg" },
    { name: "Футболка 'RoleTheWorld'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Cortez", img: "images/RoleTheWorld.jpg" },
     //{ name: "худи с сердцем(серое)", size: "L", price: "90", currency: "бун", category: "Футболки и майки", brand: "", img: "images/hoodie grey.jpg" },
     //{ name: "Кроссовки Lanvin", size: "42", price: "170", currency: "бун", category: "Кроссовки", brand: "Lanvin", img: "images/Lanvin.jpg" },
