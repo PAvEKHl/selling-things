@@ -7,7 +7,7 @@
     min-height: 78vh;
     height: auto;
     background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.5)), 
-                url('../images/MainImage1.png');
+                url('../images/MainImage1.webp');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -731,6 +731,27 @@
     right: 0;
     display: none;
     z-index: 1200;
+}
+
+/* Кнопка «Показать ещё» (постраничность) */
+.load-more-btn {
+    display: block;
+    margin: 0 auto 80px;
+    padding: 14px 40px;
+    background: linear-gradient(135deg, #ff00ff, #bf00ff);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+    transition: 0.3s;
+}
+
+.load-more-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(255, 0, 255, 0.8);
 }
 
 .mobile-cart-btn,

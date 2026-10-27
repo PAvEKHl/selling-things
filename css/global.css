@@ -25,7 +25,7 @@
 /* === ФОНОВОЕ ИЗОБРАЖЕНИЕ ДЛЯ ВСЕГО САЙТА === */
 body {
     font-family: 'Montserrat', sans-serif;
-    background: url('../images/BackgroundMain.png') center/cover fixed no-repeat;
+    background: url('../images/BackgroundMain.webp') center/cover fixed no-repeat;
     color: #ffffff;
     scroll-behavior: smooth;
     overflow-x: hidden;

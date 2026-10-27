@@ -56,14 +56,18 @@ function saveSelectedProduct(productName, productPrice) {
     }
 }
 
-// Генерация карточек товаров
+// Постраничность (lazy-рендер каталога)
+const PAGE_SIZE = 6;
+let visibleCount = PAGE_SIZE;
+
+// Генерация карточек товаров (только текущая страница)
 function loadProducts() {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
 
     grid.innerHTML = "";
 
-    items.forEach((product, index) => {
+    items.slice(0, visibleCount).forEach((product, index) => {
         const priceInRub = convertToRUB(product.price);
         const formattedPrice = priceInRub.toLocaleString() + " ₽";
 
@@ -115,6 +119,8 @@ function loadProducts() {
         grid.appendChild(card);
     });
 
+    toggleLoadMoreButton();
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -125,6 +131,32 @@ function loadProducts() {
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
+}
+
+// Кнопка «Показать ещё»
+function toggleLoadMoreButton() {
+    const container = document.querySelector('main#catalog');
+    let btn = document.getElementById('loadMoreBtn');
+
+    if (visibleCount < items.length) {
+        if (!btn) {
+            btn = document.createElement('button');
+            btn.id = 'loadMoreBtn';
+            btn.className = 'load-more-btn';
+            btn.type = 'button';
+            btn.addEventListener('click', showMore);
+            if (container) container.appendChild(btn);
+        }
+        btn.textContent = `Показать ещё (${items.length - visibleCount})`;
+    } else if (btn) {
+        btn.remove();
+    }
+}
+
+// Показать ещё страницу
+function showMore() {
+    visibleCount = Math.min(visibleCount + PAGE_SIZE, items.length);
+    loadProducts();
 }
 
 // Модальное окно
