@@ -12,23 +12,23 @@ if (tg && tg.initData) {
 }
 
 const items = [
-    { name: "Кроссовки Puma (белые)", size: "42", price: "105", currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/20xYFJMr/1-Puma.jpg" },
-    { name: "Кроссовки Puma (красные)", size: "42", price: "120", currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/4gMFBxxR/2-Puma.jpg" },
-    { name: "Тапочки Nike (чёрные)", size: "Универсальный", price: "80", currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/YTTyT9kN/3-Nike.jpg" },
-    { name: "Тапочки Nike (серо-белые)", size: "Универсальный", price: "80", currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/QvDKstWC/4-Nike-2.jpg" },
-    { name: "Тапочки Nike (серые)", size: "Универсальный", price: "80", currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/6c6ZWkjv/5-Nike.jpg" },
-    { name: "Сумочка C.P. Company", size: "Универсальный", price: "25", currency: "бун", category: "Аксессуары", brand: "", img: "https://i.ibb.co/dwSf8h4x/6-c-p-company.jpg" },
-    { name: "Футболка GloGang (белая)", size: "Универсальный", price: "55", currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/vCDnjpQ2/11-Glo-Gang.jpg" },
-    { name: "Футболка GloGang (фиолетовая)", size: "Универсальный", price: "55", currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/xtvb8hJh/8-Glo-Gang.jpg" },
-    { name: "Футболка GloGang (чёрная)", size: "Универсальный", price: "55", currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/B2yyvsx9/10-Glo-Gang.jpg" },
-    { name: "Polo Fred Perry (белая)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/nNLdvJb8/13-Polo-Fred-Perry.jpg" },
-    { name: "Polo Fred Perry (чёрное)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/FLKwDdL3/14-Polo-Fred-Perry-2.png" },
-    { name: "Женские ASICS", size: "40", price: "90", currency: "бун", category: "Аксессуары", brand: "", img: "https://i.ibb.co/GQrQZdmJ/15-ASICS.jpg" },
-    { name: "Кепки LA", size: "Универсальный", price: "15", currency: "бун", category: "Аксессуары", brand: "", img: "https://i.ibb.co/6cf7mJ49/LA.jpg" },
-    { name: "Футболка GloGang (чёрная)", size: "Универсальный", price: "55", currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/39GdRGyT/9-Glo-Gang.jpg" },
-    { name: "Polo Fred Perry (белая)", size: "Универсальный", price: "55", currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/35pnB43X/12-Glo-Gang.jpg" },
-    { name: "Polo Fred Perry (белая)", size: "Универсальный", price: "55", currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/d4STskWn/7-Glo-Gang.jpg" },
-    { name: "джинсы Dime (чёрные)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "", img: "https://i.ibb.co/BDBmYT4/Dimebkack-Street.jpg" }
+    { name: "Кроссовки Puma (белые)", size: "42", price: "105", quantity: null, currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/20xYFJMr/1-Puma.jpg" },
+    { name: "Кроссовки Puma (красные)", size: "42", price: "120", quantity: null, currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/4gMFBxxR/2-Puma.jpg" },
+    { name: "Тапочки Nike (чёрные)", size: "Универсальный", price: "80", quantity: null, currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/YTTyT9kN/3-Nike.jpg" },
+    { name: "Тапочки Nike (серо-белые)", size: "Универсальный", price: "80", quantity: null, currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/QvDKstWC/4-Nike-2.jpg" },
+    { name: "Тапочки Nike (серые)", size: "Универсальный", price: "80", quantity: null, currency: "бун", category: "Кроссовки", brand: "", img: "https://i.ibb.co/6c6ZWkjv/5-Nike.jpg" },
+    { name: "Сумочка C.P. Company", size: "Универсальный", price: "25", quantity: null, currency: "бун", category: "Аксессуары", brand: "", img: "https://i.ibb.co/dwSf8h4x/6-c-p-company.jpg" },
+    { name: "Футболка GloGang (белая)", size: "Универсальный", price: "55", quantity: null, currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/vCDnjpQ2/11-Glo-Gang.jpg" },
+    { name: "Футболка GloGang (фиолетовая)", size: "Универсальный", price: "55", quantity: null, currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/xtvb8hJh/8-Glo-Gang.jpg" },
+    { name: "Футболка GloGang (чёрная)", size: "Универсальный", price: "55", quantity: null, currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/B2yyvsx9/10-Glo-Gang.jpg" },
+    { name: "Polo Fred Perry (белая)", size: "L", price: "40", quantity: null, currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/nNLdvJb8/13-Polo-Fred-Perry.jpg" },
+    { name: "Polo Fred Perry (чёрное)", size: "L", price: "40", quantity: null, currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/FLKwDdL3/14-Polo-Fred-Perry-2.png" },
+    { name: "Женские ASICS", size: "40", price: "90", quantity: null, currency: "бун", category: "Аксессуары", brand: "", img: "https://i.ibb.co/GQrQZdmJ/15-ASICS.jpg" },
+    { name: "Кепки LA", size: "Универсальный", price: "15", quantity: null, currency: "бун", category: "Аксессуары", brand: "", img: "https://i.ibb.co/6cf7mJ49/LA.jpg" },
+    { name: "Футболка GloGang (чёрная)", size: "Универсальный", price: "55", quantity: null, currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/39GdRGyT/9-Glo-Gang.jpg" },
+    { name: "Polo Fred Perry (белая)", size: "Универсальный", price: "55", quantity: null, currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/35pnB43X/12-Glo-Gang.jpg" },
+    { name: "Polo Fred Perry (белая)", size: "Универсальный", price: "55", quantity: null, currency: "бун", category: "Футболки и майки", brand: "", img: "https://i.ibb.co/d4STskWn/7-Glo-Gang.jpg" },
+    { name: "джинсы Dime (чёрные)", size: "L", price: "85", quantity: 1, currency: "бун", category: "Джинсы", brand: "", img: "https://i.ibb.co/BDBmYT4/Dimebkack-Street.jpg" }
 ];
 
 // Транслитерация для safe deep-link в Telegram
