@@ -12,18 +12,23 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">卩卄ㄖ乇几丨乂<span>PHONEX</span></div>
-        <div class="burger" id="burger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+        <div class="logo">卩卄ㄖ乇几丨乂<span>WEAR</span></div>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Главная</a></li>
             <li><a href="index.html#catalog">Каталог</a></li>
             <li><a href="contacts.html" class="active">О нас</a></li>
             <li><a href="#contacts">Контакты</a></li>
         </ul>
+        <div class="navbar-actions">
+            <button id="cartBtn" class="cart-btn" aria-label="Открыть корзину">
+                🛒<span id="cartCount" class="cart-count">0</span>
+            </button>
+            <div class="burger" id="burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
     </nav>
 
     <header class="hero">
@@ -241,6 +246,30 @@
         </div>
         <p class="copyright">&copy; 2026 Все права защищены</p>
     </footer>
+
+    <!-- Корзина (drawer) -->
+    <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+        <div class="cart-drawer-content">
+            <div class="cart-header">
+                <h3>🛒 Ваша корзина</h3>
+                <button id="closeCart" class="close-cart" aria-label="Закрыть корзину">&times;</button>
+            </div>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-footer">
+                <div class="cart-total">Итого: <span id="cartTotal">0</span> ₽</div>
+                <button id="checkoutBot" class="checkout-bot-btn" type="button">🤖 Оформить в боте</button>
+                <button id="copyOrder" class="copy-order-btn" type="button">📋 Скопировать заказ</button>
+                <a id="goToBot" class="go-to-bot-btn" href="https://t.me/PhoenixClothesBOT?start=menu" target="_blank" rel="noopener noreferrer">Открыть @PhoenixClothesBOT</a>
+            </div>
+        </div>
+    </aside>
+    <div id="drawerOverlay" class="drawer-overlay"></div>
+
+    <!-- Нижняя липкая полоса (мобильная) -->
+    <div class="mobile-action-bar">
+        <button id="openCartMobile" class="mobile-cart-btn" type="button">🛒 <span id="cartCountMobile">0</span></button>
+        <a href="https://t.me/PhoenixClothesBOT?start=menu" class="mobile-bot-btn" target="_blank" rel="noopener noreferrer">🤖 Купить в боте</a>
+    </div>
 
     <script src="js/global.js"></script>
     <script>
