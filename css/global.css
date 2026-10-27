@@ -136,7 +136,8 @@ body::before {
 
 /* Hero секция - для главной страницы */
 .hero {
-    height: 90vh;
+    min-height: 78vh;
+    height: auto;
     background: rgba(0,0,0,0.3);
     display: flex;
     align-items: center;
@@ -145,6 +146,7 @@ body::before {
     color: white;
     margin-bottom: 80px;
     margin-top: 70px;
+    padding: 90px 20px 60px;
     border-radius: 0;
 }
 
@@ -422,7 +424,9 @@ footer {
    ===================================================================== */
 body.telegram-view .navbar,
 body.telegram-view .hero,
-body.telegram-view footer {
+body.telegram-view footer,
+body.telegram-view .mobile-action-bar,
+body.telegram-view .tg-floating-button {
     display: none !important;
 }
 

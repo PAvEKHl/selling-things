@@ -1,43 +1,56 @@
 /* ==========================================================================
-   MAIN PAGE SPECIFIC - Каталог, фильтры и модальное окно (main.js)
+   MAIN PAGE SPECIFIC - Каталог, фильтры, модалка, корзина (main.js)
    ========================================================================== */
 
 const BYN_TO_RUB = 26;
+// BOT_USERNAME объявлен в global.js (загружается раньше) — здесь используем общий
 
-// Инициализация Telegram WebApp
-const tg = window.Telegram.WebApp;
-
-if (tg.initData) {
+// Telegram WebApp
+const tg = window.Telegram && window.Telegram.WebApp;
+if (tg && tg.initData) {
     document.body.classList.add('telegram-view');
 }
 
-// Массив товаров
 const items = [
-    //{ name: "Джинсы Dime(чёрные)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/DimebkackStreet.jpg" },
-   { name: "Футболка 'RoleTheWorld'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Cortez", img: "images/RoleTheWorld.jpg" },
-    //{ name: "худи с сердцем(серое)", size: "L", price: "90", currency: "бун", category: "Футболки и майки", brand: "", img: "images/hoodie grey.jpg" },
-    //{ name: "Кроссовки Lanvin", size: "42", price: "170", currency: "бун", category: "Кроссовки", brand: "Lanvin", img: "images/Lanvin.jpg" },
-    //{ name: "C.P. Company (белая)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_White.jpg" },
+    { name: "Джинсы Dime(чёрные)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/DimebkackStreet.jpg" },
+    { name: "Футболка 'RoleTheWorld'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Cortez", img: "images/RoleTheWorld.jpg" },
+    { name: "худи с сердцем(серое)", size: "L", price: "90", currency: "бун", category: "Футболки и майки", brand: "", img: "images/hoodie grey.jpg" },
+    { name: "Кроссовки Lanvin", size: "42", price: "170", currency: "бун", category: "Кроссовки", brand: "Lanvin", img: "images/Lanvin.jpg" },
+    { name: "C.P. Company (белая)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_White.jpg" },
     { name: "C.P. Company (чёрная)", size: "L-XL", price: "40", currency: "бун", category: "Футболки и майки", brand: "C.P. Company", img: "images/C.P.Company_Black.jpg" },
-   { name: "Белые джинсы", size: "XL", price: "95", currency: "бун", category: "Джинсы", brand: "", img: "images/DjeansBagdan.jpg" },
+    { name: "Белые джинсы", size: "XL", price: "95", currency: "бун", category: "Джинсы", brand: "", img: "images/DjeansBagdan.jpg" },
     { name: "MM6 Maison Margiela (чёрная)", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "MM6", img: "images/MMBlack.jpg" },
-   { name: "Футболка 'Цветущая сакура'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Artwear", img: "images/Japan.jpg" },
+    { name: "Футболка 'Цветущая сакура'", size: "L", price: "40", currency: "бун", category: "Футболки и майки", brand: "Artwear", img: "images/Japan.jpg" },
     { name: "Джинсы Dime(синие)", size: "L", price: "85", currency: "бун", category: "Джинсы", brand: "Dime", img: "images/DimeBlue.jpg" },
 ];
 
-function convertToRUB(priceBYN) {
-    return Math.round(parseInt(priceBYN) * BYN_TO_RUB);
+// Транслитерация для safe deep-link в Telegram
+function slugify(str) {
+    const map = { 'а':'a','б':'b','в':'v','г':'g','д':'d','е':'e','ё':'e','ж':'zh','з':'z','и':'i','й':'y','к':'k','л':'l','м':'m','н':'n','о':'o','п':'p','р':'r','с':'s','т':'t','у':'u','ф':'f','х':'h','ц':'ts','ч':'ch','ш':'sh','щ':'sch','ъ':'','ы':'y','ь':'','э':'e','ю':'yu','я':'ya' };
+    let s = (str || '').toLowerCase().trim();
+    s = s.replace(/[^a-zа-я0-9]+/g, '-');
+    s = s.replace(/[\u0400-\u04ff]/g, m => map[m] || 'x');
+    s = s.replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '');
+    return s || 'item';
 }
 
-// Вспомогательная функция для сохранения выбранного товара
+// Deep-link в бот (без токена — безопасно)
+function buildBotLink(action, param) {
+    const start = `${action}_${param}`.trim();
+    return `https://t.me/${BOT_USERNAME}?start=${encodeURIComponent(start)}`;
+}
+
+function convertToRUB(priceBYN) {
+    return Math.round(parseInt(priceBYN, 10) * BYN_TO_RUB);
+}
+
+// Сохранение выбранного товара (для страницы контактов)
 function saveSelectedProduct(productName, productPrice) {
     const productData = {
         title: productName,
         description: `Цена: ${productPrice}`
     };
     localStorage.setItem('selectedProduct', JSON.stringify(productData));
-    
-    // Вызываем функцию обновления ссылок из global.js, если она доступна
     if (typeof updateContactLinks === 'function') {
         updateContactLinks();
     }
@@ -47,20 +60,20 @@ function saveSelectedProduct(productName, productPrice) {
 function loadProducts() {
     const grid = document.getElementById('catalog-grid');
     if (!grid) return;
-    
+
     grid.innerHTML = "";
-    
+
     items.forEach((product, index) => {
         const priceInRub = convertToRUB(product.price);
         const formattedPrice = priceInRub.toLocaleString() + " ₽";
-        
+
         const card = document.createElement('div');
         card.className = 'product-card';
         card.setAttribute('data-index', index);
         card.setAttribute('data-category', product.category);
         card.innerHTML = `
             <div class="img-container">
-                <img src="${product.img}" alt="${product.name}" loading="lazy" onerror="this.src='https://via.placeholder.com/500x500?text=Image+Not+Found'">
+                <img src="${product.img}" alt="${product.name}" loading="lazy">
                 <div class="badge">${product.brand || ''}</div>
             </div>
             <div class="info">
@@ -71,38 +84,37 @@ function loadProducts() {
                     <div class="price">${product.price} ${product.currency}</div>
                     <div class="price-hint">≈ ${formattedPrice}</div>
                 </div>
-                <button class="discuss-btn">
-                    💬 Обсудить покупку
-                </button>
+                <button class="cart-add-btn" type="button">🛒 В корзину</button>
             </div>
         `;
-        
-        // НАДЕЖНЫЙ КЛИК ПО КНОПКЕ «ОБСУДИТЬ ПОКУПКУ» НА КАРТОЧКЕ
-        const btn = card.querySelector('.discuss-btn');
-        btn.addEventListener('click', (e) => {
+
+        // Кнопка «В корзину»
+        const addBtn = card.querySelector('.cart-add-btn');
+        addBtn.addEventListener('click', (e) => {
             e.preventDefault();
-            e.stopPropagation(); 
-            
-            if (tg.initData) {
-                // Если в Telegram WebApp
-                const orderData = { title: product.name, cost: formattedPrice };
-                tg.sendData(JSON.stringify(orderData));
-            } else {
-                // Если в обычном браузере — сохраняем и ПЕРЕНАПРАВЛЯЕМ на страницу контактов
-                saveSelectedProduct(product.name, formattedPrice);
-                window.location.href = "contacts.html#contacts";
+            e.stopPropagation();
+            if (typeof addToCart === 'function') {
+                addToCart(product.name, formattedPrice);
             }
         });
 
-        // КЛИК ПО САМОЙ КАРТОЧКЕ (ОТКРЫТИЕ МОДАЛКИ)
+        // Скелет-плейсхолдер: проявляем картинку, когда она загрузилась
+        const img = card.querySelector('img');
+        if (img) {
+            const reveal = () => img.classList.add('loaded');
+            img.addEventListener('load', reveal);
+            if (img.complete) reveal();
+        }
+
+        // Клик по карточке (не по кнопке) — модалка
         card.addEventListener('click', (e) => {
-            if (e.target.closest('.discuss-btn')) return;
+            if (e.target.closest('.cart-add-btn')) return;
             openModal(product);
         });
-        
+
         grid.appendChild(card);
     });
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -111,20 +123,21 @@ function loadProducts() {
             }
         });
     }, { threshold: 0.1 });
-    
+
     document.querySelectorAll('.product-card').forEach(card => observer.observe(card));
 }
 
-// Управление модальным окном
+// Модальное окно
 const modal = document.getElementById('productModal');
+let currentProduct = null;
 
 function openModal(product) {
     if (!modal) return;
-    
+    currentProduct = product;
+
     const priceInRub = convertToRUB(product.price);
     const formattedPrice = priceInRub.toLocaleString() + " ₽";
-    
-    // Заполнение данных в модалке
+
     document.getElementById('modalImg').src = product.img;
     document.getElementById('modalName').innerText = product.name;
     document.getElementById('modalCategory').innerHTML = `<span class="modal-category">${product.category}</span>`;
@@ -132,60 +145,84 @@ function openModal(product) {
     document.getElementById('modalSize').innerHTML = `<span class="modal-size">📏 Размер: ${product.size}</span>`;
     document.getElementById('modalPrice').innerText = `${product.price} ${product.currency}`;
     document.getElementById('modalRubHint').innerHTML = `≈ ${formattedPrice} рублей`;
-    
-    let modalContactBtn = modal.querySelector('.modal-contact-btn') || modal.querySelector('.discuss-btn');
-    
-    if (modalContactBtn) {
-        // Очищаем старые обработчики клика
-        const newBtn = modalContactBtn.cloneNode(true);
-        modalContactBtn.parentNode.replaceChild(newBtn, modalContactBtn);
-        
-        const messageText = `Привет! Хочу купить товар:\n📦 Название: ${product.name}\n📝 Цена: ${formattedPrice}`;
-        const encodedText = encodeURIComponent(messageText);
-        
-        if (tg.initData) {
-            newBtn.innerText = "💬 Обсудить покупку";
-            newBtn.href = "#";
-            newBtn.addEventListener('click', (e) => {
+
+    // Кнопка «Купить в боте» — deep-link + копирование товара (в боте отправляем напрямую через sendData)
+    const botBtn = document.getElementById('modalBotBtn');
+    if (botBtn) {
+        botBtn.href = buildBotLink('buy', slugify(product.name));
+        botBtn.onclick = (e) => {
+            const info = {
+                title: product.name,
+                brand: product.brand,
+                size: product.size,
+                price: `${product.price} ${product.currency}`,
+                rub: formattedPrice
+            };
+            // Внутри Telegram Web App — отправляем товар боту напрямую
+            if (tg && tg.initData) {
                 e.preventDefault();
-                e.stopPropagation();
+                try {
+                    tg.sendData(JSON.stringify(info));
+                } catch (err) {
+                    window.open(botBtn.href, '_blank');
+                }
+                return;
+            }
+            // В обычном браузере — копируем товар в буфер (чтобы вставить в чат бота) + открываем deep-link
+            const text = `🛍️ Хочу купить: ${info.title}\n🏷️ Бренд: ${info.brand || '—'}\n📏 Размер: ${info.size}\n💰 ${info.price} (≈ ${info.rub})`;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('📋 Товар скопирован — вставьте в чат бота');
+                }).catch(() => {});
+            }
+        };
+    }
+
+    // Кнопка «Обсудить с менеджером»
+    const discussBtn = document.getElementById('modalDiscussBtn');
+    if (discussBtn) {
+        // Снимаем старые обработчики через клон
+        const fresh = discussBtn.cloneNode(true);
+        discussBtn.parentNode.replaceChild(fresh, discussBtn);
+
+        fresh.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (tg && tg.initData) {
                 try {
                     const orderData = { title: product.name, cost: formattedPrice };
                     tg.sendData(JSON.stringify(orderData));
-                } catch (error) {
-                    // Аварийный переход в ТГ Павла, если sendData недоступен
-                    window.location.href = `https://t.me/PavelHlebko?text=${encodedText}`;
+                } catch (err) {
+                    window.open(buildBotLink('buy', slugify(product.name)), '_blank');
                 }
-            });
-        } else {
-            // В обычном браузере кнопка модалки просто редиректит на контакты
-            newBtn.innerText = "📞 Связаться для покупки";
-            newBtn.href = "contacts.html#contacts";
-            newBtn.addEventListener('click', () => {
+            } else {
                 saveSelectedProduct(product.name, formattedPrice);
-                modal.style.display = 'none';
-            });
-        }
+                window.location.href = "contacts.html#contacts";
+            }
+        });
     }
-    
+
     modal.style.display = 'flex';
+}
+
+function closeModal() {
+    if (modal) modal.style.display = 'none';
 }
 
 function initModal() {
     if (!modal) return;
     const closeBtn = document.querySelector('.close-modal');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', () => { modal.style.display = 'none'; });
-    }
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.style.display === 'flex') closeModal();
     });
 }
 
 // Фильтры категорий
 function initFilters() {
     if (document.querySelector('.filter-bar')) return;
-    
+
     const filterContainer = document.createElement('div');
     filterContainer.className = 'filter-bar';
     filterContainer.innerHTML = `
@@ -194,21 +231,19 @@ function initFilters() {
         <button class="filter-btn" data-filter="Кроссовки">Кроссовки</button>
         <button class="filter-btn" data-filter="Джинсы">Джинсы</button>
     `;
-    
+
     const sectionTitle = document.querySelector('.section-title');
-    if (sectionTitle) {
-        sectionTitle.after(filterContainer);
-    }
-    
+    if (sectionTitle) sectionTitle.after(filterContainer);
+
     const filterBtns = document.querySelectorAll('.filter-btn');
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            
+
             const filter = btn.dataset.filter;
             const cards = document.querySelectorAll('.product-card');
-            
+
             cards.forEach((card) => {
                 const category = card.getAttribute('data-category');
                 if (filter === 'all' || category === filter) {
@@ -226,10 +261,10 @@ function initFilters() {
 // Статистика
 function showStats() {
     if (document.querySelector('.stats-bar')) return;
-    
+
     const uniqueBrands = [...new Set(items.map(i => i.brand).filter(b => b && b !== ''))];
-    const cheapItems = items.filter(i => parseInt(i.price) < 50).length;
-    
+    const cheapItems = items.filter(i => parseInt(i.price, 10) < 50).length;
+
     const statsHTML = `
         <div class="stats-bar">
             <div class="stat-item"><span class="stat-number">${items.length}</span><span class="stat-label">товаров</span></div>
@@ -237,25 +272,15 @@ function showStats() {
             <div class="stat-item"><span class="stat-number">${cheapItems}</span><span class="stat-label">до 50 бун</span></div>
         </div>
     `;
-    
+
     const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        heroContent.insertAdjacentHTML('beforeend', statsHTML);
-    }
+    if (heroContent) heroContent.insertAdjacentHTML('beforeend', statsHTML);
 }
 
-// Инициализация скриптов главной страницы
+// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
     loadProducts();
     initModal();
     initFilters();
     showStats();
-    
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        if (question) {
-            question.addEventListener('click', () => { item.classList.toggle('active'); });
-        }
-    });
 });

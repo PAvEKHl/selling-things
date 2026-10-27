@@ -2,11 +2,17 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>卩卄ㄖ乇几丨乂 WEAR | Магазин одежды</title>
-    
+    <meta name="description" content="卩卄ㄖ乇几丨乂 WEAR — новая коллекция 2026. Минимализм и комфорт в каждой детали. Быстрая покупка через Telegram-бот @PhoenixClothesBOT.">
+    <meta property="og:title" content="卩卄ㄖ乇几丨乂 WEAR | Магазин одежды">
+    <meta property="og:description" content="Новая коллекция 2026. Быстрая покупка через Telegram-бот @PhoenixClothesBOT.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="images/MainImage1.png">
+    <link rel="icon" href="images/phoenix.jpg" type="image/jpeg">
+
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/main.css">
 
@@ -16,17 +22,22 @@
 
     <nav class="navbar">
         <div class="logo">卩卄ㄖ乇几丨乂<span>WEAR</span></div>
-        <div class="burger" id="burger">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Главная</a></li>
             <li><a href="#catalog" id="catalogNavLink">Каталог</a></li>
             <li><a href="contacts.html">О нас</a></li>
             <li><a href="contacts.html#contacts">Контакты</a></li>
         </ul>
+        <div class="navbar-actions">
+            <button id="cartBtn" class="cart-btn" aria-label="Открыть корзину">
+                🛒<span id="cartCount" class="cart-count">0</span>
+            </button>
+            <div class="burger" id="burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
     </nav>
 
     <header class="hero">
@@ -36,6 +47,16 @@
             <a href="#catalog" class="cta-btn">Смотреть каталог</a>
         </div>
     </header>
+
+    <section class="bot-banner">
+        <div class="bot-banner-content">
+            <div class="bot-banner-text">
+                <h2>Быстрее в Telegram-боте 🤖</h2>
+                <p>Цена, размер и доставка — за 1 клик. Без ожидания в чате с менеджером.</p>
+            </div>
+            <a href="https://t.me/PhoenixClothesBOT?start=menu" class="cta-bot-btn" target="_blank" rel="noopener noreferrer">Открыть @PhoenixClothesBOT →</a>
+        </div>
+    </section>
 
     <main id="catalog">
         <div class="section-title" id="catalogTitle">
@@ -48,16 +69,39 @@
     <div id="productModal" class="modal">
         <div class="modal-content">
             <span class="close-modal">&times;</span>
-            <img id="modalImg" src="" alt="">
+            <div class="modal-img-wrap">
+                <img id="modalImg" src="" alt="">
+            </div>
             <h3 id="modalName"></h3>
             <div id="modalBrand" style="margin: 10px 0;"></div>
             <div id="modalCategory" style="margin: 10px 0;"></div>
             <div id="modalSize" style="margin: 10px 0;"></div>
             <div class="price" id="modalPrice" style="font-size: 2rem; margin-top: 15px;"></div>
             <div id="modalRubHint" style="margin-top: 5px; font-size: 0.9rem; color: #28a745;"></div>
-            <a href="contacts.html#contacts" class="modal-contact-btn">📞 Связаться для покупки</a>
+            <div class="modal-actions">
+                <a id="modalBotBtn" class="modal-bot-btn" target="_blank" rel="noopener noreferrer">🤖 Купить в боте</a>
+                <button id="modalDiscussBtn" class="modal-discuss-btn" type="button">💬 Обсудить с менеджером</button>
+            </div>
         </div>
     </div>
+
+    <!-- Корзина (drawer) -->
+    <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+        <div class="cart-drawer-content">
+            <div class="cart-header">
+                <h3>🛒 Ваша корзина</h3>
+                <button id="closeCart" class="close-cart" aria-label="Закрыть корзину">&times;</button>
+            </div>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-footer">
+                <div class="cart-total">Итого: <span id="cartTotal">0</span> ₽</div>
+                <button id="checkoutBot" class="checkout-bot-btn" type="button">🤖 Оформить в боте</button>
+                <button id="copyOrder" class="copy-order-btn" type="button">📋 Скопировать заказ</button>
+                <a id="goToBot" class="go-to-bot-btn" href="https://t.me/PhoenixClothesBOT?start=menu" target="_blank" rel="noopener noreferrer">Открыть @PhoenixClothesBOT</a>
+            </div>
+        </div>
+    </aside>
+    <div id="drawerOverlay" class="drawer-overlay"></div>
 
     <footer>
         <div class="footer-content">
@@ -75,41 +119,47 @@
         <p class="copyright">&copy; 2026 Все права защищены</p>
     </footer>
 
+    <!-- Нижняя липкая полоса (мобильная) -->
+    <div class="mobile-action-bar">
+        <button id="openCartMobile" class="mobile-cart-btn" type="button">🛒 <span id="cartCountMobile">0</span></button>
+        <a href="https://t.me/PhoenixClothesBOT?start=menu" class="mobile-bot-btn" target="_blank" rel="noopener noreferrer">🤖 Купить в боте</a>
+    </div>
+
     <script src="js/global.js"></script>
     <script src="js/main.js"></script>
-    
+
     <script>
         function scrollToCatalogTitle() {
             const catalogTitle = document.getElementById('catalogTitle');
             const navbar = document.querySelector('.navbar');
-            
+
             if (catalogTitle) {
                 const titlePosition = catalogTitle.getBoundingClientRect().top + window.pageYOffset;
                 const navbarHeight = navbar ? navbar.offsetHeight : 80;
                 const offsetPosition = titlePosition - navbarHeight - 10;
-                
+
                 window.scrollTo({
                     top: offsetPosition,
                     behavior: 'smooth'
                 });
-                
+
                 catalogTitle.classList.add('highlight-title');
                 setTimeout(() => {
                     catalogTitle.classList.remove('highlight-title');
                 }, 800);
             }
         }
-        
+
         document.addEventListener('DOMContentLoaded', () => {
             const catalogLinks = document.querySelectorAll('a[href="#catalog"]');
-            
+
             catalogLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     scrollToCatalogTitle();
                 });
             });
-            
+
             if (window.location.hash === '#catalog') {
                 setTimeout(() => {
                     scrollToCatalogTitle();
@@ -119,18 +169,15 @@
     </script>
 
     <script>
-        const tg = window.Telegram.WebApp;
-        tg.expand();
-
-        function sendOrderData(productName, price) {
-            const orderInfo = {
-                title: productName,
-                cost: price
-            };
-            tg.sendData(JSON.stringify(orderInfo));
-        }
+        // Telegram WebApp — защищённая инициализация (не падает вне Telegram)
+        (function () {
+            var tg = window.Telegram && window.Telegram.WebApp;
+            if (tg) {
+                try { tg.expand(); } catch (e) { /* ignore */ }
+            }
+        })();
     </script>
-    <a href="https://t.me/PhoenixClothesbot" class="tg-floating-button" target="_blank" rel="noopener noreferrer">
+    <a href="https://t.me/PhoenixClothesBOT?start=menu" class="tg-floating-button" target="_blank" rel="noopener noreferrer">
         <svg viewBox="0 0 24 24" class="tg-icon">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
         </svg>
